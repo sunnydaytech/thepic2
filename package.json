@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "dependencies": {
     "co": "^4.5.1",
-    "koa": "^0.18.1"
+    "koa": "^0.18.1",
+    "koa-ejs": "^1.1.3",
+    "koa-router": "^4.2.0",
+    "koa-static-cache": "^3.0.2"
   }
 }
