@@ -4,13 +4,17 @@
   padding: 0;
 } 
 
+#canvas {
+  position: relative;
+}
+
 .block {
   background-repeat: no-repeat;
   float: left;
+  position: absolute;
 }
-.row::after {
-  content: "";
-  clear: both;
-  display: table;
+
+.empty {
+  background: grey;
 }
 
