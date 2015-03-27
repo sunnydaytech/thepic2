@@ -1,3 +1,16 @@
-.picture {
-  background-image: url("http://www.rolereboot.org/wp-content/uploads/2014/08/Stephanie-Hello-Kitty-471x420.gif");
+* {
+  border: solid 1px;
+  margin: 0;
+  padding: 0;
+} 
+
+.block {
+  background-repeat: no-repeat;
+  float: left;
 }
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
