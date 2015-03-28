@@ -2,3 +2,4 @@ node_modules
 **/*.swp
 build
 config.js
+config.js.template
