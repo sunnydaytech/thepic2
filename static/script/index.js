@@ -54,7 +54,7 @@
 
 
   var originalImageUrl = 
-    "http://itakon.it/wp-content/uploads/2013/11/Snake-Big-Boss-MGS5-Ground-Zeroes-Play-Arts-Kai-Square-Enix-pre-01.jpg";
+    "http://res.cloudinary.com/sunnydaytech/image/upload/t_square-center/v1427519009/hmmb6k9yqiugr8wlod4s.jpg";
   var canvasEl = document.getElementById("canvas");
   var imageSize = canvasEl.offsetWidth;
   var imageUrl = getResizeImageUrl(originalImageUrl, imageSize);
