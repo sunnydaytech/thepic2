@@ -4,17 +4,48 @@
   padding: 0;
 } 
 
+body {
+  background: grey;
+}
 #canvas {
   position: relative;
+  -webkit-box-shadow: 3px 7px 38px -6px rgba(10,9,10,0.93);
+  -moz-box-shadow: 3px 7px 38px -6px rgba(10,9,10,0.93);
+  box-shadow: 3px 7px 38px -6px rgba(10,9,10,0.93);
 }
 
 .block {
   background-repeat: no-repeat;
   float: left;
   position: absolute;
+  border-radius: 4px; 
+  border: solid 2px;
+}
+
+#canvas {
+  height: 280px;
+  width: 280px;
+  margin: 0 auto;
+}
+
+.game-container {
+  height: 304px;
+  width: 304px;
+  margin: 0 auto;
 }
 
 .empty {
-  background: grey;
+  background: rgb(179, 175, 175);
 }
 
+@media (min-width: 600px) {
+  #canvas {
+    height: 500px;
+    width: 500px;
+  }
+
+  .game-container {
+    height: 514px;
+    width: 504px;
+  }
+}

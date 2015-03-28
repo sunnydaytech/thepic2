@@ -53,9 +53,10 @@
   };
 
 
-  var originalImageUrl = "http://www.rolereboot.org/wp-content/uploads/2014/08/Stephanie-Hello-Kitty-471x420.gif";
+  var originalImageUrl = 
+    "http://itakon.it/wp-content/uploads/2013/11/Snake-Big-Boss-MGS5-Ground-Zeroes-Play-Arts-Kai-Square-Enix-pre-01.jpg";
   var canvasEl = document.getElementById("canvas");
-  var imageSize = 600;
+  var imageSize = canvasEl.offsetWidth;
   var imageUrl = getResizeImageUrl(originalImageUrl, imageSize);
   var perBlockSize = imageSize / blockNum;
   var shuffle = [];
@@ -65,7 +66,7 @@
       shuffle[i].push({r: i, c: j});
     }
   }
-  for (var i = 0; i < 100; i++) {
+  for (var i = 0; i < 0; i++) {
     var pos1 = randomPos(blockNum);
     var pos2 = randomPos(blockNum);
 
