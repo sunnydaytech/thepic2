@@ -23,6 +23,7 @@ module.exports = function(grunt) {
     clean: ['build'],
     uglify: {
       options: {
+        compress: true,
         banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
       },
       build: {
