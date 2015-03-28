@@ -1,14 +1,19 @@
-<%= user.displayName %>
-<% if (user.photos) { %>
-<img src="<%= user.photos[0].value %>">
-<% }%>
-
 <div class="game-container">
   <div id="canvas">  
 
 
   </div>
+  <div class="profile">
+    <% if (user) { %> 
+      <%= user.displayName %>
+      <% if (user.photos) { %>
+      <img src="<%= user.photos[0].value %>">
+      <% }%>
+    <% } else { %>
+      <a href="/auth/twitter">Sign in with Twitter</a>
+      <a href="/auth/facebook">Sign in with Facebook</a>
+    <% } %>
+  </div>
 </div>
-<a href="/auth/twitter">Sign in with Twitter</a>
-<a href="/auth/facebook">Sign in with Facebook</a>
+
 
