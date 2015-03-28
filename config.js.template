@@ -1,0 +1,16 @@
+
+module.exports = {
+  port: 8080,
+  authConfig: {
+    twitter: {
+      consumerKey: "jG7O6rG5bp4FDaceHm5Uzo5Z6",
+      consumerSecret: "7r0DPC2lulNjuK8w9w4gUVTTQdDYos5IjILYpqSbTNtLFRQuSa"
+    },
+    facebook: {
+      clientID: '351223868418240',
+      clientSecret: '593bdac7fb5622d0f048fed2190e37f0'
+    }
+  }
+};
+
+

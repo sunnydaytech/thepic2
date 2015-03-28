@@ -1,4 +1,5 @@
 
+var CONFIG = require('./config');
 var app = require('./lib/app');
 
-app.listen(8080);
+app.start(CONFIG);
