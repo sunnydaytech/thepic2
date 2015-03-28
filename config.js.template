@@ -1,0 +1,16 @@
+
+module.exports = {
+  port: 8080,
+  authConfig: {
+    twitter: {
+      consumerKey: 'CONSUMER_KEY',
+      consumerSecret: 'CONSUMER_SECRET'
+    },
+    facebook: {
+      clientID: 'CONSUMER_KEY',
+      clientSecret: 'CONSUMER_SECRET'
+    }
+  }
+};
+
+
