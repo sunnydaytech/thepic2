@@ -66,7 +66,7 @@
       shuffle[i].push({r: i, c: j});
     }
   }
-  for (var i = 0; i < 0; i++) {
+  for (var i = 0; i < 100; i++) {
     var pos1 = randomPos(blockNum);
     var pos2 = randomPos(blockNum);
 
