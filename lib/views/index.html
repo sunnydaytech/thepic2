@@ -1,17 +1,21 @@
 <div class="game-container">
   <div id="canvas">  
-
-
+    <!-- canvas to draw pictures --> 
+  </div>
+  <div class="stats clear">
+    <span>Like 22</span>
+    <span>Comment 12</span>
   </div>
   <div class="profile">
     <% if (user) { %> 
-      <%= user.displayName %>
       <% if (user.photos) { %>
-      <img src="<%= user.photos[0].value %>">
+        <img src="<%= user.photos[0].value %>">
       <% }%>
+      <span><%= user.displayName %></span>
     <% } else { %>
-      <a href="/auth/twitter">Sign in with Twitter</a>
-      <a href="/auth/facebook">Sign in with Facebook</a>
+      Sign in with
+      <a href="/auth/twitter">Twitter</a>
+      <a href="/auth/facebook">Facebook</a>
     <% } %>
   </div>
 </div>

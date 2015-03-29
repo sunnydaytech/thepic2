@@ -1,12 +1,14 @@
 * {
   margin: 0;
   padding: 0;
+  border: 0;
 } 
 
 body {
   background: grey;
 }
 #canvas {
+  margin: 0 auto;
   position: relative;
   -webkit-box-shadow: 3px 7px 38px -6px rgba(10,9,10,0.93);
   -moz-box-shadow: 3px 7px 38px -6px rgba(10,9,10,0.93);
@@ -21,21 +23,38 @@ body {
   border: solid 2px;
 }
 
-#canvas {
-  height: 280px;
-  width: 280px;
-  margin: 0 auto;
-}
-
 .game-container {
-  height: 304px;
-  width: 304px;
+  width: 284px;
+  padding: 20px 10px 10px 2px;
   margin: 0 auto;
 }
 
 .empty {
   background: rgb(179, 175, 175);
 }
+.clear::after {
+  clear: both;
+  content: "";
+  display: table;
+}
+.stats span {
+  float:right;
+  margin-top: 5px;
+}
+
+.profile {
+  margin-top: 20px;
+  height: 25px
+  font-size: 25px;
+}
+.profile img {
+  width: 25px;
+  height: 25px;
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
 
 @media (min-width: 600px) {
   #canvas {

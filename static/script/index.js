@@ -57,6 +57,8 @@
     "http://res.cloudinary.com/sunnydaytech/image/upload/t_square-center/v1427519009/hmmb6k9yqiugr8wlod4s.jpg";
   var canvasEl = document.getElementById("canvas");
   var imageSize = canvasEl.offsetWidth;
+  canvasEl.style.height = imageSize + 'px';
+  canvasEl.style.width =imageSize + 'px';
   var imageUrl = getResizeImageUrl(originalImageUrl, imageSize);
   var perBlockSize = imageSize / blockNum;
   var shuffle = [];
