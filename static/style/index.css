@@ -5,7 +5,7 @@
 } 
 
 body {
-  background: grey;
+  width: 100%;
 }
 #canvas {
   margin: 0 auto;
@@ -42,8 +42,24 @@ body {
   margin-top: 5px;
 }
 
+.comment {
+  border: solid 1px;
+  list-style-type: none;
+  list-style-position: inside;
+  padding: 2px;
+  margin-top: 4px;
+  border-color: rgb(226, 217, 217) rgba(194, 180, 180, 0.12) rgba(214, 232, 214, 0.01) rgb(203, 200, 200);
+}
+.comment-content {
+  float: left;
+  display: inline;
+  width: 100%;
+}
+.comments .comment .profile {
+  float: right;
+}
+
 .profile {
-  margin-top: 20px;
   height: 25px
   font-size: 25px;
 }
@@ -55,6 +71,35 @@ body {
   border: 0;
 }
 
+.comment-box {
+  width: 100%;
+  position: fixed;
+  padding: 4px;
+  bottom: 0;
+  left: 0;
+  border: solid 1px;
+  border-top-color: black;
+}
+.comment-box * {
+}
+.comment-box .header .profile {
+  float: left;
+}
+.comment-box .header .submit {
+  float: right;
+}
+.comment-box .comment-input {
+  width: 100%;
+  border: solid 1px;
+  border-color: rgb(124, 102, 102);
+}
+.action-button {
+  background-color: rgb(14, 46, 210);
+  color: white;
+  padding: 4px;
+  border-radius: 3px;
+  margin: 5px;
+}
 
 @media (min-width: 600px) {
   #canvas {

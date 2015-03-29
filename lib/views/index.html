@@ -6,17 +6,49 @@
     <span>Like 22</span>
     <span>Comment 12</span>
   </div>
-  <div class="profile">
-    <% if (user) { %> 
-      <% if (user.photos) { %>
-        <img src="<%= user.photos[0].value %>">
-      <% }%>
-      <span><%= user.displayName %></span>
-    <% } else { %>
-      Sign in with
-      <a href="/auth/twitter">Twitter</a>
-      <a href="/auth/facebook">Facebook</a>
-    <% } %>
+  <ul class="comments">
+    <li class="comment clear">
+      <p class="comment-content">
+        This is some comments...
+      </p>
+      <div class="profile">
+        <% if (user.photos) { %>
+          <img src="<%= user.photos[0].value %>">
+        <% }%>
+        <span><%= user.displayName %></span>
+      </div>
+    </li>
+    <li class="comment clear">
+      <p class="comment-content">
+        This is some comments...
+      </p>
+      <div class="profile">
+        <% if (user.photos) { %>
+          <img src="<%= user.photos[0].value %>">
+        <% }%>
+        <span><%= user.displayName %></span>
+      </div>
+    </li>
+  </ul>
+  <div class="comment-box clear">
+    <div class="header">
+      <div class="profile">
+        <% if (user) { %> 
+          <% if (user.photos) { %>
+            <img src="<%= user.photos[0].value %>">
+          <% }%>
+          <span><%= user.displayName %></span>
+        <% } else { %>
+          Sign in with
+          <a href="/auth/twitter">Twitter</a>
+          <a href="/auth/facebook">Facebook</a>
+        <% } %>
+      </div>
+      <a class="submit action-button">
+        Submit
+      </a>
+    </div>
+    <textarea class="comment-input" autofocus></textarea>
   </div>
 </div>
 

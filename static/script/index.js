@@ -104,4 +104,9 @@
 
   var inputManager = new KeyboardInputManager();
   inputManager.on('move', move.bind(this))
+  /*
+  var webcomponentScript = document.createElement('script');
+  webcomponentScript.src = '/webcomponentsjs/webcomponents.js'; 
+  document.body.appendChild(webcomponentScript);
+  */
 });
