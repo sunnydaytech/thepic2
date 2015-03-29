@@ -22,9 +22,11 @@ body {
   border-radius: 4px; 
   border: solid 2px;
 }
+.full-width {
+  width: 284px;
+}
 
 .game-container {
-  width: 284px;
   padding: 20px 10px 10px 2px;
   margin: 0 auto;
 }
@@ -72,11 +74,9 @@ body {
 }
 
 .comment-box {
-  width: 100%;
   position: fixed;
   padding: 4px;
   bottom: 0;
-  left: 0;
   border: solid 1px;
   border-top-color: black;
 }
@@ -101,14 +101,8 @@ body {
   margin: 5px;
 }
 
-@media (min-width: 600px) {
-  #canvas {
-    height: 500px;
-    width: 500px;
-  }
-
-  .game-container {
-    height: 514px;
-    width: 504px;
+@media (min-width: 600px) and (min-height: 700px) {
+  .full-width {
+    width: 600px;
   }
 }
