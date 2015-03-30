@@ -1,0 +1,27 @@
+<ul class="comments">
+  <% if (user) { %> 
+  <li class="comment clear">
+    <p class="comment-content">
+      This is some comments...
+    </p>
+    <div class="profile">
+      <% if (user.photos) { %>
+        <img src="<%= user.photos[0].value %>">
+      <% }%>
+      <span><%= user.displayName %></span>
+    </div>
+  </li>
+  <li class="comment clear">
+    <p class="comment-content">
+      This is some comments...
+    </p>
+    <div class="profile">
+      <% if (user.photos) { %>
+        <img src="<%= user.photos[0].value %>">
+      <% }%>
+      <span><%= user.displayName %></span>
+    </div>
+  </li>
+  <% } %>
+</ul>
+

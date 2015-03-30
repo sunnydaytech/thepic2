@@ -1,0 +1,9 @@
+<div class="profile">
+  <% if (user) { %> 
+    <% if (user.photos) { %>
+      <img src="<%= user.photos[0].value %>">
+    <% }%>
+    <span><%= user.displayName %></span>
+  <% } %>
+</div>
+
