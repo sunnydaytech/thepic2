@@ -7,6 +7,13 @@
 body {
   width: 100%;
 }
+.hidden {
+  display: none;
+}
+.button {
+  border: 1px solid;
+
+}
 #canvas {
   margin: 0 auto;
   position: relative;
