@@ -66,6 +66,10 @@ module.exports = function(grunt) {
         {
           src: 'server.js',
           dest: 'build/server.js'
+        },
+        {
+          src: 'config.js',
+          dest: 'build/config.js'
         }]
   });
 
