@@ -16,7 +16,9 @@
     "oauth": "^0.9.12",
     "passport-facebook": "^2.0.0",
     "passport-twitter": "^1.0.3",
-    "thunkify": "^2.1.2"
+    "thunkify": "^2.1.2",
+    "winston": "^0.9.0",
+    "winston-papertrail": "^1.0.1"
   },
   "devDependencies": {
     "grunt": "^0.4.5",
