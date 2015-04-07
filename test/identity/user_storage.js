@@ -19,8 +19,26 @@ describe('auth', function() {
     var expectedNewUser = { id: '10206340756268002',
       displayName: 'NichoIas Xu',
       emails: undefined,
-      photos: undefined,
       profilePic: 'https://graph.facebook.com/10206340756268002/picture?type=small' }
+    var newUser = User.findUser(userId);
+    assert.deepEqual(expectedNewUser, newUser);
+  });
+
+  it('Should serialize twitter account correctly', function() {
+    var userId = '46372497';
+    var twitterUser = { id: userId,
+      username: 'Nich01as_cn',
+      displayName: 'Nicholas',
+      photos: [ { value: 'https://pbs.twimg.com/profile_images/259741017/0418-2000-03_normal.JPG' } ],
+      provider: 'twitter',
+    };
+    User.createOrUpdateUser(twitterUser);
+    var expectedNewUser = {
+      id: userId,
+      displayName: 'Nicholas',
+      emails: undefined,
+      profilePic: 'https://pbs.twimg.com/profile_images/259741017/0418-2000-03_normal.JPG'
+    }
     var newUser = User.findUser(userId);
     assert.deepEqual(expectedNewUser, newUser);
   });
