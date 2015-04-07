@@ -46,6 +46,6 @@ describe('auth', function() {
     auth(router, config); 
     assert.equal('http://thepicsquare.com:8080/auth/facebook/callback', 
         passport._strategies.facebook._callbackURL);
-  })
+  });
 
 });
