@@ -3,6 +3,7 @@
   margin: 0;
   padding: 0;
   border: 0;
+  box-sizing: border-box;
 } 
 
 body {
@@ -33,12 +34,6 @@ body {
 .full-width {
   width: 284px;
 }
-
-.game-container {
-  padding: 20px 10px 10px 2px;
-  margin: 0 auto;
-}
-
 .empty {
   background: rgb(179, 175, 175);
 }
@@ -47,24 +42,9 @@ body {
   content: "";
   display: table;
 }
-.stats span {
-  float:right;
-  margin-top: 5px;
-}
 
-.comment {
-  border: solid 1px;
-  list-style-type: none;
-  list-style-position: inside;
-  padding: 2px;
-  margin-top: 4px;
-  border-color: rgb(226, 217, 217) rgba(194, 180, 180, 0.12) rgba(214, 232, 214, 0.01) rgb(203, 200, 200);
-}
-.comment-content {
-  float: left;
-  display: inline;
-  width: 100%;
-}
+
+
 .comments .comment .profile {
   float: right;
 }
