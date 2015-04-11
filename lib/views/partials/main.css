@@ -43,52 +43,6 @@ body {
   display: table;
 }
 
-
-
-.comments .comment .profile {
-  float: right;
-}
-
-.profile {
-  height: 25px
-  font-size: 25px;
-}
-.profile img {
-  width: 25px;
-  height: 25px;
-  padding: 0;
-  margin: 0;
-  border: 0;
-}
-
-.comment-box {
-  position: fixed;
-  padding: 4px;
-  bottom: 0;
-  border: solid 1px;
-  border-top-color: black;
-}
-.comment-box * {
-}
-.comment-box .header .profile {
-  float: left;
-}
-.comment-box .header .submit {
-  float: right;
-}
-.comment-box .comment-input {
-  width: 100%;
-  border: solid 1px;
-  border-color: rgb(124, 102, 102);
-}
-.action-button {
-  background-color: rgb(14, 46, 210);
-  color: white;
-  padding: 4px;
-  border-radius: 3px;
-  margin: 5px;
-}
-
 @media (min-width: 600px) and (min-height: 700px) {
   .full-width {
     width: 600px;
