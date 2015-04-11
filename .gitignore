@@ -1,7 +1,5 @@
 node_modules
 **/*.swp
 build
-config.js
 bower_components
 tmp_img
-gcloud_client_secret.json

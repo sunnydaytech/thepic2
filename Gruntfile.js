@@ -64,12 +64,10 @@ module.exports = function(grunt) {
           rename: renameFile
         },
         {
-          src: 'server.js',
-          dest: 'build/server.js'
-        },
-        {
-          src: 'config.js',
-          dest: 'build/config.js'
+          cwd: '.',
+          src: '*.js',
+          dest: 'build',
+          expand: true
         }]
   });
 
