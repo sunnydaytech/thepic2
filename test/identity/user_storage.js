@@ -18,7 +18,6 @@ describe('auth', function() {
     User.createOrUpdateUser(fbUser);
     var expectedNewUser = { id: '10206340756268002',
       displayName: 'NichoIas Xu',
-      emails: undefined,
       profilePic: 'https://graph.facebook.com/10206340756268002/picture?type=small' }
     var newUser = User.findUser(userId);
     assert.deepEqual(expectedNewUser, newUser);
@@ -36,7 +35,6 @@ describe('auth', function() {
     var expectedNewUser = {
       id: userId,
       displayName: 'Nicholas',
-      emails: undefined,
       profilePic: 'https://pbs.twimg.com/profile_images/259741017/0418-2000-03_normal.JPG'
     }
     var newUser = User.findUser(userId);
