@@ -1,8 +1,8 @@
+cd /home/nicholas_zhaoyu_gmail_com/thepic2
 git pull
 sudo npm install
 bower install
 grunt --force
-/home/nicholas_zhaoyu_gmail_com/thepic2
 cd build
 sudo lsof -i:80 | grep LISTEN | awk '{print $2}' | xargs sudo kill
 nohup sudo node --harmony server.js prod > log &
