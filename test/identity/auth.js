@@ -22,6 +22,10 @@ describe('auth', function() {
         facebook: {
           clientID: 'clientId',
           clientSecret: 'clientSecret'
+        },
+        weibo: {
+          clientID: 'clientID',
+          clientSecret: 'clientSecret'
         }
       }};
     auth(router, config); 
@@ -40,6 +44,10 @@ describe('auth', function() {
         },
         facebook: {
           clientID: 'clientId',
+          clientSecret: 'clientSecret'
+        },
+        weibo: {
+          clientID: 'clientID',
           clientSecret: 'clientSecret'
         }
       }};
