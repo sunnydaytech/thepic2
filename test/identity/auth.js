@@ -56,4 +56,4 @@ describe('auth', function() {
         passport._strategies.facebook._callbackURL);
   });
 
-});
+})
