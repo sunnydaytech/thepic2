@@ -4,8 +4,11 @@
   padding: 0;
   border: 0;
   box-sizing: border-box;
+  font-family: Georgia, "Times New Roman", 
+    "Microsoft YaHei", "微软雅黑", 
+    STXihei, "华文细黑", 
+     serif;
 } 
-
 body {
   width: 100%;
 }
