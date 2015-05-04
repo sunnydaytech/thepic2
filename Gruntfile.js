@@ -58,10 +58,6 @@ module.exports = function(grunt) {
           src: ['**/*', '!**/*.js'],
           dest: 'build/static',
           expand: true,
-          options: {
-            process: replaceContent 
-          },
-          rename: renameFile
         },
         {
           cwd: '.',
