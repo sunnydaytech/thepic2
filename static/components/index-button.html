@@ -1,0 +1,42 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<dom-module id="index-button">
+  <style>
+    :host {
+      text-align: center;  
+      font-size: 1.5em;
+      font-weight: bolder;  
+    }
+    img {
+      height: 100px;
+      display: block;  
+    }
+    a {
+      padding: 0 10px;
+      display: block;
+    }
+    div {
+      margin: 15px;
+      display: inline-block;
+    }
+  </style>
+
+  <template>
+    <div>
+      <img src="{{src}}" />
+      <a href="{{href}}">{{buttonText}}</a>
+    </div>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'index-button',
+      properties: {
+        buttonText: String 
+      },
+      ready: function() {
+      }
+
+    });
+  </script>
+</dom-module>
