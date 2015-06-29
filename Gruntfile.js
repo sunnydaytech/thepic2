@@ -48,10 +48,6 @@ module.exports = function(grunt) {
           src: '**/*',
           dest: 'build/bower_components',
           expand: true,
-          options: {
-            process: replaceContent 
-          },
-          rename: renameFile
         },
         {
           cwd: 'static',
