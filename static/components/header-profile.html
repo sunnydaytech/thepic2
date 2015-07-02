@@ -1,0 +1,43 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<dom-module id="header-profile">
+  <style>
+    :host {
+      display: inline-block;
+    }
+    .profile {
+      height: 40px;
+    }
+    .profile a {
+      display: inline-block;
+    }
+    .profile img {
+      height: 40px;
+      display: inline-block;
+      position: relative;
+      top: -3px;  
+    }
+    .profile span {
+      display: inline-block;
+      position: relative;  
+      bottom: 12px;
+    }
+  </style> 
+  <template>
+    <div class="profile">
+      <a href="/user/<%= user.id%>">
+        <img src="{{profilePic}}">
+        <span>{{displayName}}</span>
+      </a>
+    </div>
+  </template>
+  <script>
+    Polymer({
+      is: 'header-profile',
+      properties: {
+        displayName: String,
+        profilePic: String
+      },
+    });
+  </script>
+</dom-module>
