@@ -1,0 +1,42 @@
+<link rel="import" href="/polymer/polymer.html">
+<link rel="import" href="/components/pages/page-index.html">
+<link rel="import" href="/components/pages/page-hot.html">
+<link rel="import" href="/components/pages/page-my-pics.html">
+<dom-module id="pic-app">
+  <style>
+  </style>
+  <template>
+    <div on-hot-page-selected="handleSelectHotPage"
+         on-my-pics-page-selected="handleSelectMyPicsPage"
+         on-index-page-selected="handleSelectIndexPage">
+      <app-header>
+        <a>
+          <span class="loginButton">
+            | Login
+          </span>
+        </a>
+      </app-header>
+      <div id="container"><page-index></page-index></div>
+    </div>
+  </template>
+  <script>
+    Polymer({
+      is: 'pic-app',
+      handleSelectHotPage: function(e) {
+        var contentEl = this.$.container.childNodes[0];
+        var pageHotEl = document.createElement('page-hot');
+        this.$.container.replaceChild(pageHotEl, contentEl)
+      },
+      handleSelectIndexPage: function(e) {
+        var contentEl = this.$.container.childNodes[0];
+        var pageIndexEl = document.createElement('page-index');
+        this.$.container.replaceChild(pageIndexEl,contentEl);
+      },
+      handleSelectMyPicsPage: function(e) {
+        var contentEl = this.$.container.childNodes[0];
+        var pageMyPicsEl = document.createElement('page-my-pics');
+        this.$.container.replaceChild(pageMyPicsEl,contentEl);
+      }
+    });
+  </script>
+</dom-module>

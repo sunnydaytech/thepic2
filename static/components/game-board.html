@@ -1,0 +1,75 @@
+<link rel="import" href="/polymer/polymer.html">
+
+<dom-module id="game-board">
+  <style>
+    :host {
+      display: block;
+      width: 300px;
+      position: relative; 
+    }
+    .block {
+      background-repeat: no-repeat;
+      float: left;
+      position: absolute;
+      border-radius: 4px; 
+      border: solid 2px;
+    }
+  </style>
+  <template>
+    <div>
+    </div>
+  </template>
+  <script>
+    Polymer({
+      is: 'game-board',
+      properties: {
+        id: {
+          type: String,
+          notify: true,
+          observer: '_idChanged'
+        }
+      },
+      attached: function() {
+        this.imageUrl = this._getResizeImageUrl(this.id, this.offsetWidth);
+        this.emptyCol = 0;
+        this.emptyRow = 0;
+        this.blockNum = 3,
+        this.blocks = [];
+        var canvasSize = this.offsetWidth;
+        this.style.height = canvasSize + 'px';
+        this.style.width = canvasSize + 'px';
+        var perBlockSize = canvasSize / this.blockNum;
+
+        for (var i = 0; i < this.blockNum; i++) {
+          this.blocks.push([]);
+          for (var j = 0; j < this.blockNum; j++) {
+            var blockEl = document.createElement("div");
+            var r = i;
+            var c = j;
+            blockEl.style.backgroundImage = 'url(' + this.imageUrl + ')';
+            blockEl.style.backgroundPosition = -c * perBlockSize + 'px ' + (-r * perBlockSize) + 'px';
+            blockEl.classList.add('block');
+            blockEl.style.top = i * perBlockSize + 'px';
+            blockEl.style.left = j * perBlockSize + 'px';
+            blockEl.style.height = perBlockSize + 'px';
+            blockEl.style.width = perBlockSize + 'px';
+            blockEl.setAttribute('r', r)
+            blockEl.setAttribute('c', c);
+            this.appendChild(blockEl);
+            this.blocks[i].push(blockEl);
+          }
+        }
+      },
+
+      _idChanged: function(newId) {
+        console.log(event);
+      },
+
+
+      _getResizeImageUrl: function(imageId, size) {
+         return 'http://res.cloudinary.com/sunnydaytech/image/upload/c_fill,h_' + 
+           size + ',w_' + size + '/' + imageId;
+      },
+    });
+  </script>
+</dom-module>

@@ -1,0 +1,67 @@
+<link rel="import" href="../polymer/polymer.html">
+<dom-module id="pic-uploader">
+  <style>
+    :host {
+      display: block;
+    }
+    .uploader .file {
+      width: 100px;
+      height: 100px;
+    }
+    #selectFile {
+      line-height: 80px;
+      font: bold;
+    }
+    .fake-button {
+      font-size: 2em;
+      width: 280px;
+      height: 80px;
+      margin: 0 auto;
+      border: solid 1px;
+      text-align: center;
+      background-color: #C2D487;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .loading-wrapper p {
+      margin-top: 24px;
+    }
+  </style>
+  <template>
+    <div id="uploader" class="uploader">
+      <form id="uploaderForm" action="/upload" method="post" enctype="multipart/form-data">
+        <input id="fileInput" class="file" type="file" name="file" multiple>
+      </form>
+      <div class="hidden fake-button" id="selectFile">
+        上传图片 
+      </div>
+      <div class="fake-button loading-wrapper hidden" id="uploading">
+        <p>上传中</p>
+        <% include loading.html %>
+      </div>
+    </div>
+  </template>
+  <script>
+    Polymer({
+      is: 'pic-uploader',
+      ready: function() {
+        var fileInputEl = this.$.fileInput;
+        fileInputEl.style.display = 'none';
+        var selectFileButton = this.$.selectFile;
+        var formEl = this.$.uploaderForm;
+        var loadingEl = this.$.uploading;
+
+        fileInputEl.onchange = function() {
+          loadingEl.classList.remove('hidden');
+          selectFileButton.classList.add('hidden');
+          formEl.submit();
+        }
+        selectFileButton.onclick = function() {
+          fileInputEl.click();
+        };
+        selectFileButton.classList.remove('hidden');
+      }
+    });
+  </script>
+</dom-module>

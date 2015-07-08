@@ -1,0 +1,35 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="/components/game-board.html">
+
+<dom-module id="hot-card">
+  <style>
+    :host {
+      display:block;
+    }
+    span {
+      display: inline-block;
+    }
+  </style>
+  <template>
+  <!--
+  <span>{{hot.id}}</span>
+  <span>{{hot.url}}</span>
+  -->
+  <div id="gameContainer">
+  </div>
+  </template>
+  <script>
+    Polymer({
+      is: 'hot-card',
+      properties: {
+        imageId: String,
+        hot: Object
+      },
+      attached : function() {
+        var gameBoardEl = document.createElement('game-board');
+        gameBoardEl.id = this.hot.id;
+        this.$.gameContainer.appendChild(gameBoardEl);
+      }
+    });
+  </script>
+</dom-module>

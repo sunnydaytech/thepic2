@@ -1,0 +1,56 @@
+<link rel="import" href="/polymer/polymer.html">
+<link rel="import" href="/components/hot-card.html">
+<link rel="import" href="/components/index-button.html">
+<link rel="import" href="/components/app-header.html">
+<link rel="import" href="/components/pic-uploader.html">
+<dom-module id="page-index">
+  <style>
+    .index-buddy {
+      margin: 0 auto;
+      display: block;  
+      width: 200px;  
+      position: relative; 
+      top: 25px;
+    }
+    .index-buddy img {
+      width: 200px;
+    }
+
+    .links {
+      margin: 0 auto;
+      width: 300px;
+      display: block;
+      margin-top: 30px;
+    }
+  </style>
+  <template>
+    <div class="index-buddy">
+      <img src="/img//index-buddy.png">
+    </div>
+    <pic-uploader></pic-uploader>
+    <div class="links"">
+      <index-button 
+        on-click="handleSelectHotPage"
+        src="/img/hot_picture.png"
+        href="/hot"
+        button-text="最热拼图"></index-button>
+      <index-button 
+        on-click="handleSelectMyPicsPage"
+        src="/img/my_picture.png"
+        href="/user/<% if (user) {%><%= user.id%><%}%>"
+        button-text="我的拼图"></index-button>
+    </div>
+  </template>
+  <script>
+    Polymer({
+      is: 'page-index',
+      handleSelectHotPage: function(e) {
+        console.log('click ' + e);
+        this.fire('hot-page-selected');
+      },
+      handleSelectMyPicsPage: function(e) {
+        this.fire('my-pics-page-selected');
+      }
+    });
+  </script>
+</dom-module>

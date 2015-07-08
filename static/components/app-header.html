@@ -1,0 +1,80 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="/components/header-profile.html">
+
+<dom-module id="app-header">
+  <style>
+    :host {
+      display: block;
+    }
+    ::content span {
+      display: inline-block;
+      position: relative;
+      bottom: 12px;
+    }
+    .head-log {
+      display: block;
+    }
+    .head-logo {
+      margin: 0px 15px;
+      position: absolute;
+      height: 30px;
+    }
+    .header {
+      position: relative;
+      padding-top: 2px;  
+      padding-bottom: 3px;
+      height: 38px;
+      border-bottom: solid #DACFCF 1px;
+    }
+    .header .profile-container {
+      float: right;
+      margin-right: 30px;
+      display: inline-block;
+    }
+    .notification {
+      float: right;
+      background-color: rgba(236, 4, 4, 0.8);
+      margin: 1px 5px;
+      padding: 3px;  
+      border-radius: 5px 5px 5px 5px;
+      -moz-border-radius: 5px 5px 5px 5px;
+      -webkit-border-radius: 5px 5px 5px 5px;
+      border: 0.5px solid #6e6b6e;
+      width: 25px;
+      height: 25px;
+      text-align: center;
+    }
+    .notification a {
+    }
+    .notification.empty {
+      display: none;
+    }
+    .fa-upload {
+      position: absolute;
+      left: 65px;
+      top: 10px;
+    }
+  </style>
+  <template>
+    <div class="header">
+      <img class="head-logo" on-click="handleLogoClicked" src="/img/logo-diamond-180.png">
+      <div class="profile-container">
+        <header-profile
+          display-name="游客"
+          profile-pic="/img/guest-profile.png">
+        </header-profile>
+        <content selector=".loginButton"></content>
+      </div>
+    </div>
+  </template>
+  <script>
+    Polymer({
+      is: 'app-header',
+      properties: {
+      },
+      handleLogoClicked: function(e) {
+        this.fire('index-page-selected');
+      }
+    });
+  </script>
+</dom-module>

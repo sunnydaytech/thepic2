@@ -5,26 +5,32 @@
     :host {
       text-align: center;  
       font-size: 1.5em;
-      font-weight: bolder;  
+      display: inline-block;
     }
     img {
       height: 100px;
       display: block;  
+      margin: 0 auth; 
     }
-    a {
-      padding: 0 10px;
+    span {
+      padding: 5px 10px;
       display: block;
     }
     div {
       margin: 15px;
       display: inline-block;
     }
+    .img-container {
+      margin: 0 auto;
+    }
   </style>
 
   <template>
     <div>
+      <div class="img-container">
       <img src="{{src}}" />
-      <a href="{{href}}">{{buttonText}}</a>
+      </div>
+      <span>{{buttonText}}</span>
     </div>
   </template>
 

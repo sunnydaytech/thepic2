@@ -1,0 +1,40 @@
+<link rel="import" href="/polymer/polymer.html">
+<link rel="import" href="/iron-ajax/iron-ajax.html">
+<link rel="import" href="/components/hot-card.html">
+
+<dom-module id="page-hot">
+  <style>
+    game-board {
+      width: 300px;
+      height: 300px;      
+    }
+  </style>
+  <template>
+    <iron-ajax
+      auto
+      url="/_/hot"
+      params='{}'
+      handle-as="json"
+      on-response="handleHotResponse"
+      debounce-duration="300"></iron-ajax>
+      <p>
+        Hello this page-hot.
+      </p>
+    <div id="picsContainer">
+    </div>
+  </template>
+  <script>
+    Polymer({
+      is: 'page-hot',
+      handleHotResponse: function(event) {
+        var context = this;
+        event.detail.response.forEach(function(resp) {
+          var hotCardEl = document.createElement('hot-card');
+          hotCardEl.hot = resp;
+          hotCardEl.classList.add('hot-card');
+          context.$.picsContainer.appendChild(hotCardEl);
+        });
+      }
+    });
+  </script>
+</dom-module>
