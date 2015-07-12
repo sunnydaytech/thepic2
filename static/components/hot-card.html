@@ -3,10 +3,22 @@
 
 <dom-module id="hot-card">
   <style>
-    :host {
-      display:block;
+    :host{
+      display: inline-block;
+      padding: 20px;
+      -webkit-box-shadow: 3px 4px 14px 3px rgba(179,179,179,1);
+      -moz-box-shadow: 3px 4px 14px 3px rgba(179,179,179,1);
+      box-shadow: 3px 4px 14px 3px rgba(179,179,179,1);
+      margin: 20px;
+      border-radius: 6px 6px 6px 6px;
+      -moz-border-radius: 6px 6px 6px 6px;
+      -webkit-border-radius: 6px 6px 6px 6px;
+      border: 0px solid #000000;
     }
     span {
+      display: inline-block;
+    }
+    #gameContainer {
       display: inline-block;
     }
   </style>
@@ -15,8 +27,20 @@
   <span>{{hot.id}}</span>
   <span>{{hot.url}}</span>
   -->
+  <div>
+    <span>FirstName LastName</span>
+  </div>
   <div id="gameContainer">
   </div>
+    <ol>
+      <li>
+        comment 1
+      </li>
+      <li>
+        comment 1
+      </li>
+    </ol>
+
   </template>
   <script>
     Polymer({

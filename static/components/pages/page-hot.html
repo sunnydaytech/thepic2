@@ -4,9 +4,21 @@
 
 <dom-module id="page-hot">
   <style>
-    game-board {
-      width: 300px;
-      height: 300px;      
+    :host {
+      display: block;
+    }
+    ::-webkit-scrollbar { 
+      display: none; 
+    }
+    .hot-card-el {
+      display: inline-block;
+      height: 500px;
+      width: 400px;
+    }
+    #picsContainer {
+      overflow: auto;
+      white-space:nowrap;
+      width: 540px;
     }
   </style>
   <template>
@@ -17,9 +29,6 @@
       handle-as="json"
       on-response="handleHotResponse"
       debounce-duration="300"></iron-ajax>
-      <p>
-        Hello this page-hot.
-      </p>
     <div id="picsContainer">
     </div>
   </template>
@@ -31,7 +40,8 @@
         event.detail.response.forEach(function(resp) {
           var hotCardEl = document.createElement('hot-card');
           hotCardEl.hot = resp;
-          hotCardEl.classList.add('hot-card');
+          hotCardEl.style.width = "400px";
+          hotCardEl.style.height = "500px";
           context.$.picsContainer.appendChild(hotCardEl);
         });
       }
