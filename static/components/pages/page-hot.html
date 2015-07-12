@@ -18,7 +18,7 @@
     #picsContainer {
       overflow: auto;
       white-space:nowrap;
-      width: 540px;
+      width: 100%;
     }
   </style>
   <template>
@@ -40,7 +40,11 @@
         event.detail.response.forEach(function(resp) {
           var hotCardEl = document.createElement('hot-card');
           hotCardEl.hot = resp;
-          hotCardEl.style.width = "400px";
+          var cardWidth = 400;
+          if (window.innerWidth <= 410) {
+            cardWidth = window.innerWidth - 20;
+          }
+          hotCardEl.style.width = cardWidth + "px";
           hotCardEl.style.height = "500px";
           context.$.picsContainer.appendChild(hotCardEl);
         });

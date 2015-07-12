@@ -52,6 +52,7 @@
       attached : function() {
         var gameBoardEl = document.createElement('game-board');
         gameBoardEl.id = this.hot.id;
+        gameBoardEl.style.width = (this.offsetWidth - 40) + "px";
         this.$.gameContainer.appendChild(gameBoardEl);
       }
     });

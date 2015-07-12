@@ -6,9 +6,7 @@
   <style>
   </style>
   <template>
-    <div on-hot-page-selected="handleSelectHotPage"
-         on-my-pics-page-selected="handleSelectMyPicsPage"
-         on-index-page-selected="handleSelectIndexPage">
+    <div>
       <app-header>
         <a>
           <span class="loginButton">
@@ -16,26 +14,34 @@
           </span>
         </a>
       </app-header>
-      <div id="container"><page-index></page-index></div>
+      <div id="container"></div>
     </div>
   </template>
   <script>
     Polymer({
       is: 'pic-app',
-      handleSelectHotPage: function(e) {
-        var contentEl = this.$.container.childNodes[0];
-        var pageHotEl = document.createElement('page-hot');
-        this.$.container.replaceChild(pageHotEl, contentEl)
+      ready: function() {
+        var context = this;
+        window.onhashchange = function() {
+          var elName;
+          var hash = window.location.hash;
+          context._loadPage(hash);
+        };
+        this._loadPage(window.location.hash);
       },
-      handleSelectIndexPage: function(e) {
+      _loadPage: function(hash) {
         var contentEl = this.$.container.childNodes[0];
-        var pageIndexEl = document.createElement('page-index');
-        this.$.container.replaceChild(pageIndexEl,contentEl);
-      },
-      handleSelectMyPicsPage: function(e) {
-        var contentEl = this.$.container.childNodes[0];
-        var pageMyPicsEl = document.createElement('page-my-pics');
-        this.$.container.replaceChild(pageMyPicsEl,contentEl);
+        if (!hash || hash.length <= 1) {
+          elName = 'page-index';
+        } else {
+          elName = 'page-' + hash.substr(1);
+        }
+        var newContentEl = document.createElement(elName);
+        if (contentEl) {
+          this.$.container.replaceChild(newContentEl, contentEl);
+        } else {
+          this.$.container.appendChild(newContentEl);
+        }
       }
     });
   </script>
