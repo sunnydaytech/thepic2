@@ -40,8 +40,8 @@
         event.detail.response.forEach(function(resp) {
           var hotCardEl = document.createElement('hot-card');
           hotCardEl.hot = resp;
-          var cardWidth = 400;
-          if (window.innerWidth <= 410) {
+          var cardWidth = 320;
+          if (window.innerWidth <= 320) {
             cardWidth = window.innerWidth - 20;
           }
           hotCardEl.style.width = cardWidth + "px";
