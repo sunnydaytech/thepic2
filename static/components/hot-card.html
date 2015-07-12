@@ -52,7 +52,8 @@
       attached : function() {
         var gameBoardEl = document.createElement('game-board');
         gameBoardEl.id = this.hot.id;
-        gameBoardEl.style.width = (this.offsetWidth - 40) + "px";
+        gameBoardEl.style.width = (this.offsetWidth - 80) + "px";
+        gameBoardEl.style.margin = '20px';
         this.$.gameContainer.appendChild(gameBoardEl);
       }
     });
