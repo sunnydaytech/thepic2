@@ -27,11 +27,12 @@
   <span>{{hot.id}}</span>
   <span>{{hot.url}}</span>
   -->
-  <div>
-    <span>FirstName LastName</span>
-  </div>
-  <div id="gameContainer">
-  </div>
+  <div on-click="handleCardClicked">
+    <div>
+      <span>xox FirstName LastName</span>
+    </div>
+    <div id="gameContainer">
+    </div>
     <ol>
       <li>
         comment 1
@@ -40,6 +41,7 @@
         comment 1
       </li>
     </ol>
+  </div>
 
   </template>
   <script>
@@ -55,6 +57,9 @@
         gameBoardEl.style.width = (this.offsetWidth - 80) + "px";
         gameBoardEl.style.margin = '20px';
         this.$.gameContainer.appendChild(gameBoardEl);
+      },
+      handleCardClicked: function() {
+        window.location.href = '/#game?id=' + this.hot.id;
       }
     });
   </script>

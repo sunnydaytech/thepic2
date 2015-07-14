@@ -1,0 +1,46 @@
+<link rel="import" href="/polymer/polymer.html">
+<link rel="import" href="/components/index-button.html">
+
+<dom-module id="page-game">
+  <style>
+    :host {
+      display: block;
+    }
+    #container {
+      margin: 0 auto;
+    }
+  </style>
+  <template>
+    <span>已用xx步</span>
+    <div id="gameContainer">
+    </div>
+    <index-button 
+        src="/img/hint.png"
+        button-text="原图提示">
+    </index-button>
+    <index-button 
+        src="/img/hint.png"
+        button-text="重玩一次">
+    </index-button>
+
+    <index-button 
+        src="/img/give-up.png"
+        button-text="我要放弃">
+    </index-button>
+  </template>
+  <script>
+    Polymer({
+      is: 'page-game',
+      properties: {
+        args: Object
+      },
+      attached: function() {
+        var gameBoardEl = document.createElement('game-board');
+        gameBoardEl.id = this.args.id;
+        gameBoardEl.style.width = (this.offsetWidth - 80) + "px";
+        gameBoardEl.style.margin = '0 40px';
+        this.$.gameContainer.appendChild(gameBoardEl);
+      }
+    });
+  </script>
+</dom-module>

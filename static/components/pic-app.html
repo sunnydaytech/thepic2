@@ -2,6 +2,7 @@
 <link rel="import" href="/components/pages/page-index.html">
 <link rel="import" href="/components/pages/page-hot.html">
 <link rel="import" href="/components/pages/page-my-pics.html">
+<link rel="import" href="/components/pages/page-game.html">
 <dom-module id="pic-app">
   <style>
   </style>
@@ -31,12 +32,31 @@
       },
       _loadPage: function(hash) {
         var contentEl = this.$.container.childNodes[0];
-        if (!hash || hash.length <= 1) {
+        if (hash && hash.length >= 1) {
+          hash = hash.substr(1);
+        }
+        var qIdx = hash.indexOf('?');
+        if (!hash || hash.length <= 1 || qIdx == 0) {
           elName = 'page-index';
         } else {
-          elName = 'page-' + hash.substr(1);
+          if (qIdx >= 0) {
+            elName = 'page-' + hash.substr(0, qIdx);
+          } else {
+            elName = 'page-' + hash;
+          }
+        }
+        var args = {};
+        if (qIdx >= 0) {
+          var argsStr = hash.substr(qIdx + 1).split('&');
+          console.log('argsStr is ' + argsStr);
+          for (var argIdx in argsStr) {
+            var arg = argsStr[argIdx].split('=');
+            args[arg[0]] = arg[1];
+          }
         }
         var newContentEl = document.createElement(elName);
+        newContentEl.args = args;
+        console.log('args are ' + JSON.stringify(args));
         if (contentEl) {
           this.$.container.replaceChild(newContentEl, contentEl);
         } else {
