@@ -15,8 +15,6 @@
     }
   </style>
   <template>
-    <div>
-    </div>
   </template>
   <script>
     Polymer({
@@ -78,6 +76,11 @@
           emptyBlock.classList.add('empty');
           this._shuffle(count, 100, done);
         }.bind(this), delay);
+      },
+
+      // Move towards direction.
+      move : function(direction) {
+        this._move(direction);
       },
 
       _shuffle : function(count, delay, done) {

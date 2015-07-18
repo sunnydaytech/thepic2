@@ -1,0 +1,102 @@
+<link rel="import" href="/polymer/polymer.html">
+
+<dom-module id="touch-controller">
+  <style>
+    :host {
+      display: block;
+    }
+  </style>
+  <template>
+    <content></content>
+  </template>
+  <script>
+    Polymer({
+      is: 'touch-controller',
+
+      // Keymap
+      map: {
+          38: 0, // Up
+          39: 1, // Right
+          40: 2, // Down
+          37: 3, // Left
+          /*   75: 0, // vim keybindings
+          76: 1,
+          74: 2,
+          72: 3,
+          87: 0, // W
+          68: 1, // D
+          83: 2, // S
+          65: 3  // A */
+      },      
+
+      attached: function() {
+        console.log('touch controller attached.');
+        this._listen();
+      },
+
+      _listen : function () {
+        this._listenToKeyboard(); 
+        this._listenToTouch();
+      },
+
+      _emit : function(action, direction) {
+        var controlledEl = Polymer.dom(this).querySelector('.controlled');
+        if (controlledEl) {
+          controlledEl.move(direction);
+        }
+      },
+
+      _listenToKeyboard : function() {
+        document.addEventListener("keydown", function (event) {
+          var modifiers = event.altKey || event.ctrlKey || event.metaKey ||
+                          event.shiftKey;
+          var mapped = this.map[event.which];
+
+          if (!modifiers) {
+            if (mapped !== undefined) {
+              event.preventDefault();
+              this._emit("move", mapped);
+            }
+
+            if (event.which === 32) {
+              event.preventDefault();
+            }
+          }
+        }.bind(this));
+      },
+
+      _listenToTouch : function() {
+        // Listen to swipe events
+        var touchStartClientX, touchStartClientY;
+
+        this.addEventListener("touchstart", function (event) {
+          if (event.touches.length > 1) return;
+
+          touchStartClientX = event.touches[0].clientX;
+          touchStartClientY = event.touches[0].clientY;
+          // Enable mobile input.
+          // event.preventDefault();
+        });
+
+        this.addEventListener("touchmove", function (event) {
+          event.preventDefault();
+        });
+
+        this.addEventListener("touchend", function (event) {
+          if (event.touches.length > 0) return;
+
+          var dx = event.changedTouches[0].clientX - touchStartClientX;
+          var absDx = Math.abs(dx);
+
+          var dy = event.changedTouches[0].clientY - touchStartClientY;
+          var absDy = Math.abs(dy);
+
+          if (Math.max(absDx, absDy) > 10) {
+            // (right : left) : (down : up)
+            this._emit("move", absDx > absDy ? (dx > 0 ? 1 : 3) : (dy > 0 ? 2 : 0));
+          }
+        }.bind(this));
+      }
+    });
+  </script>
+</dom-module>

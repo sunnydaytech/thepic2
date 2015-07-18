@@ -1,6 +1,8 @@
 <link rel="import" href="/polymer/polymer.html">
 <link rel="import" href="/iron-flex-layout/iron-flex-layout.html">
+
 <link rel="import" href="/components/index-button.html">
+<link rel="import" href="/components/touch-controller.html">
 
 <dom-module id="page-game">
   <style>
@@ -11,15 +13,20 @@
       margin: 0 auto;
       max-width: 550px;
     }
+    .step-count {
+      @apply(--layout-horizontal);
+      @apply(--layout-center-justified);
+      margin: 25px 0 25px;
+    }
     .buttons {
        @apply(--layout-horizontal);
        @apply(--layout-center-justified);
     }
   </style>
   <template>
-    <span>已用xx步</span>
-    <div id="gameContainer">
-    </div>
+    <span class="step-count">已用xx步</span>
+    <touch-controller id="gameContainer">
+    </touch-controller>
     <div class="buttons">
       <index-button 
           src="/img/hint.png"
@@ -51,7 +58,9 @@
         }
         gameBoardEl.style.width = (width - 80) + "px";
         gameBoardEl.style.margin = '0 40px';
-        this.$.gameContainer.appendChild(gameBoardEl);
+        gameBoardEl.classList.add('controlled');
+
+        Polymer.dom(this.$.gameContainer).appendChild(gameBoardEl);
         gameBoardEl.shuffle(100, 1000);
       }
     });
