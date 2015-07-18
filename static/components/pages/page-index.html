@@ -1,8 +1,11 @@
 <link rel="import" href="/polymer/polymer.html">
+<link rel="import" href="/iron-flex-layout/iron-flex-layout.html">
+
 <link rel="import" href="/components/hot-card.html">
 <link rel="import" href="/components/index-button.html">
 <link rel="import" href="/components/app-header.html">
 <link rel="import" href="/components/pic-uploader.html">
+
 <dom-module id="page-index">
   <style>
     :host {
@@ -19,10 +22,8 @@
       width: 200px;
     }
     .links {
-      margin: 0 auto;
-      width: 300px;
-      display: block;
-      margin-top: 30px;
+      @apply(--layout-horizontal);
+      @apply(--layout-center-justified);
     }
   </style>
   <template>

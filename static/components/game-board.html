@@ -28,6 +28,10 @@
           observer: '_idChanged'
         }
       },
+
+      // Constants for directions.
+      _DIR : [[-1, 0], [0, 1], [1, 0], [0, -1]],
+
       attached: function() {
         this.imageUrl = this._getResizeImageUrl(this.id, this.offsetWidth);
         this.emptyCol = 0;
@@ -64,11 +68,107 @@
         console.log(event);
       },
 
+      /**
+       * Shuffle blocks.
+       **/
+      shuffle: function(count, delay, done) {
+        setTimeout(function() {
+          var emptyBlock = this.blocks[this.emptyRow][this.emptyCol];
+          emptyBlock.style.backgroundImage = '';
+          emptyBlock.classList.add('empty');
+          this._shuffle(count, 100, done);
+        }.bind(this), delay);
+      },
+
+      _shuffle : function(count, delay, done) {
+        setTimeout(function() {
+          if (count <= 0) {
+            if (done) {
+              done();
+            }
+          } else {
+            this._move(this._randomDir());
+            if (this._disorder() >= 8) {
+              this._shuffle(count/2, delay, done);
+            } else {
+              this._shuffle(count-1, delay/1.01, done);
+            }
+          }
+        }.bind(this), delay);
+      },
+
+      _disorder : function() {
+        var ret = 0;
+        for (var i = 0; i < this.blockNum; i++) {
+          for (var j = 0; j < this.blockNum; j++) {
+            if (this.blocks[i][j].getAttribute('r') != i ||
+                this.blocks[i][j].getAttribute('c') != j) {
+              ret++;
+            }
+          }
+        }
+        return ret;
+      },
+
 
       _getResizeImageUrl: function(imageId, size) {
          return 'http://res.cloudinary.com/sunnydaytech/image/upload/c_fill,h_' + 
            size + ',w_' + size + '/' + imageId;
       },
+
+
+      /**
+       * Generaets a integer in [0, 1, 2, 3].
+       */
+      _randomDir : function() {
+        return this._random(4);
+      },
+
+      /**
+       * Generates a integer in range of [0, n).
+       */
+      _random : function(n) {
+        return Math.floor(Math.random() * n);
+      },
+
+      /**
+       * Checks if x is in [0, N).
+       */
+      _isInRange : function(x, N) {
+        return x >= 0 && x < N;
+      },
+
+      /**
+       * Moves empty block toward 'direction'.
+       */
+      _move : function(direction) {
+        var DIR = this._DIR, 
+            blocks = this.blocks,
+            blockNum = this.blockNum,
+            emptyRow = this.emptyRow, 
+            emptyCol = this.emptyCol;
+        direction = (direction + 2) % 4;
+        var newR = emptyRow + DIR[direction][0];
+        var newC = emptyCol + DIR[direction][1];
+        if (this._isInRange(newR, blockNum) && this._isInRange(newC, blockNum)) {
+
+          var tmp = blocks[newR][newC].style.top;
+          blocks[newR][newC].style.top = blocks[emptyRow][emptyCol].style.top;
+          blocks[emptyRow][emptyCol].style.top = tmp;
+
+          tmp = blocks[newR][newC].style.left;
+          blocks[newR][newC].style.left = blocks[emptyRow][emptyCol].style.left;
+          blocks[emptyRow][emptyCol].style.left = tmp;
+
+          tmp = blocks[newR][newC];
+          blocks[newR][newC] = blocks[emptyRow][emptyCol];
+          blocks[emptyRow][emptyCol] = tmp;
+
+          this.emptyRow = newR;
+          this.emptyCol = newC;
+        }
+      },
+
     });
   </script>
 </dom-module>
