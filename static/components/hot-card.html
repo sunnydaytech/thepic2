@@ -15,12 +15,42 @@
       -webkit-border-radius: 6px 6px 6px 6px;
       border: 0px solid #000000;
     }
-    span {
-      display: inline-block;
-    }
     #gameContainer {
       display: inline-block;
     }
+    .profile {
+      height: 40px;
+    }
+    .profile img {
+      border-radius: 50%;
+      height: 40px;
+    }
+    .profile span {
+      display: inline-block;
+      height: 40px;
+      line-height: 40px;
+    }
+    .profile {
+      display: inline-block;
+    }
+    #startGame {
+      display: inline-block;
+      float: right;
+      height: 40px;
+      line-height: 40px;
+      background-color: #ABCA74;
+      color: white;
+      padding: 0 15px;
+    }
+    #metaBar {
+      height: 40px;
+    }
+    hr {
+      width: 100%;
+      color: #E0E0E0;
+      border: solid 1px;
+    }
+
   </style>
   <template>
   <!--
@@ -28,11 +58,16 @@
   <span>{{hot.url}}</span>
   -->
   <div on-click="handleCardClicked">
-    <div>
-      <span>{{hot.id}}</span>
+    <div id="metaBar">
+      <div class="profile">
+        <img src="{{hot.imageMetadata.uploader.profilePic}}"></img>
+        <span>{{hot.imageMetadata.uploader.displayName}}</span>
+      </div>
+      <span id="startGame" on-click="handleCardClicked">开始拼图</span>
     </div>
     <div id="gameContainer">
     </div>
+    <hr>
     <ol>
       <li>
         comment 1
