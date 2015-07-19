@@ -92,8 +92,14 @@
         user: Object
       },
       ready: function() {
-        this.user = window.appConfig.user;
-        console.log('logged in user is ' + this.user.displayName);
+        if (window.appConfig.user) {
+          this.user = window.appConfig.user;
+        } else {
+          this.user = {
+            displayName: 'Guest',
+            profilePic: '/img/guest-profile.png'
+          }
+        }
       }
     });
   </script>
