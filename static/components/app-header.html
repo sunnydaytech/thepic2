@@ -1,4 +1,6 @@
 <link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="/iron-flex-layout/iron-flex-layout.html">
+
 <link rel="import" href="/components/header-profile.html">
 
 <dom-module id="app-header">
@@ -65,7 +67,11 @@
           display-name="游客"
           profile-pic="/img/guest-profile.png">
         </header-profile>
-        <content selector=".loginButton"></content>
+        <a>
+          <span class="loginButton">
+            | Login
+          </span>
+        </a>
       </div>
     </div>
   </template>
@@ -73,9 +79,6 @@
     Polymer({
       is: 'app-header',
       properties: {
-      },
-      handleLogoClicked: function(e) {
-        this.fire('index-page-selected');
       }
     });
   </script>

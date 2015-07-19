@@ -22,6 +22,29 @@
       position: relative;  
       bottom: 12px;
     }
+    .login-menues{
+      @apply(--layout-vertical);
+      @apply(--layout-center-justified);
+      position: fixed;
+      min-height: 70px;
+      left: 0px;
+      bottom: 0px;
+      right: 0px;
+      border: 1px solid;  
+      padding: 5px;
+    }
+    .login-menues p {
+      margin: 8px auto;
+      font-size: 1.2em;
+    }
+    .login-icons {
+      @apply(--layout-horizontal);
+      @apply(--layout-center-justified);
+      width: 100%;  
+    }
+    .login-icons index-button {
+      padding: 5px;
+    }
   </style> 
   <template>
     <div class="profile">
@@ -30,14 +53,37 @@
         <span>{{displayName}}</span>
       </a>
     </div>
+    <div class="login-menues">
+      <p>登陆</p>
+      <div class="login-icons">
+        <index-button 
+          src="/img/twitter.jpg"
+          href="/auth/twitter"
+          button-text="Twitter"></index-button>
+        <index-button 
+          src="/img/facebook.jpg"
+          href="/auth/facebook"
+          button-text="Facebook"></index-button>
+        <index-button 
+          src="/img/weibo.jpg"
+          href="/auth/weibo"
+          button-text="Weibo"></index-button>
+      </div>
+    </div>
   </template>
   <script>
     Polymer({
       is: 'header-profile',
+      user: null,
       properties: {
         displayName: String,
-        profilePic: String
+        profilePic: String,
+        user: Object
       },
+      created: function() {
+        this.user = window.appConfig.user;
+        console.log('logged in user is ' + this.user);
+      }
     });
   </script>
 </dom-module>
