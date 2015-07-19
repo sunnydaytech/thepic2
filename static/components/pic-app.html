@@ -8,7 +8,9 @@
   </style>
   <template>
     <div>
-      <app-header>
+      <app-header
+        user={{user}} 
+      >
       </app-header>
       <div id="container"></div>
     </div>
@@ -16,6 +18,9 @@
   <script>
     Polymer({
       is: 'pic-app',
+      properties: {
+        user: Object
+      },
       ready: function() {
         var context = this;
         window.onhashchange = function() {

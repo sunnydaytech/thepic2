@@ -7,21 +7,28 @@
     }
     .profile {
       height: 40px;
+      display: inline-block;
     }
     .profile a {
       display: inline-block;
     }
     .profile img {
-      height: 40px;
+      height: 30px;
       display: inline-block;
       position: relative;
-      top: -3px;  
     }
     .profile span {
       display: inline-block;
       position: relative;  
       bottom: 12px;
     }
+
+    .loginButton {
+      display: inline-block;
+      position: relative;
+      bottom: 12px;
+    }
+
     .login-menues{
       @apply(--layout-vertical);
       @apply(--layout-center-justified);
@@ -32,6 +39,7 @@
       right: 0px;
       border: 1px solid;  
       padding: 5px;
+      background-color: white;
     }
     .login-menues p {
       margin: 8px auto;
@@ -48,11 +56,15 @@
   </style> 
   <template>
     <div class="profile">
-      <a href="/user/<%= user.id%>">
-        <img src="{{profilePic}}">
-        <span>{{displayName}}</span>
+      <a href="/user/{{user.id}}>">
+        <img src="{{user.profilePic}}">
+        <span>{{user.displayName}}</span>
       </a>
     </div>
+    <span class="loginButton">
+        | Login
+    </span>
+
     <div class="login-menues">
       <p>登陆</p>
       <div class="login-icons">
@@ -74,15 +86,14 @@
   <script>
     Polymer({
       is: 'header-profile',
-      user: null,
       properties: {
         displayName: String,
         profilePic: String,
         user: Object
       },
-      created: function() {
+      ready: function() {
         this.user = window.appConfig.user;
-        console.log('logged in user is ' + this.user);
+        console.log('logged in user is ' + this.user.displayName);
       }
     });
   </script>
