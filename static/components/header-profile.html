@@ -23,13 +23,13 @@
       bottom: 12px;
     }
 
-    .loginButton {
+    #loginButton {
       display: inline-block;
       position: relative;
       bottom: 12px;
     }
 
-    .login-menues{
+    #loginMenues {
       @apply(--layout-vertical);
       @apply(--layout-center-justified);
       position: fixed;
@@ -41,9 +41,14 @@
       padding: 5px;
       background-color: white;
     }
-    .login-menues p {
+    #loginMenues p {
       margin: 8px auto;
       font-size: 1.2em;
+    }
+    #close {
+      position: absolute;
+      right: 0px;
+      top: 0px;
     }
     .login-icons {
       @apply(--layout-horizontal);
@@ -61,11 +66,12 @@
         <span>{{user.displayName}}</span>
       </a>
     </div>
-    <span class="loginButton">
+    <span id="loginButton" on-click="showLoginMenues">
         | Login
     </span>
 
-    <div class="login-menues">
+    <div id="loginMenues" class="hidden">
+      <div id="close" on-click="hideLoginMenues">X</div>
       <p>登陆</p>
       <div class="login-icons">
         <index-button 
@@ -93,6 +99,7 @@
       },
       ready: function() {
         if (window.appConfig.user) {
+          this.$.loginButton.classList.add('hidden');
           this.user = window.appConfig.user;
         } else {
           this.user = {
@@ -100,6 +107,13 @@
             profilePic: '/img/guest-profile.png'
           }
         }
+      },
+
+      showLoginMenues: function() {
+        this.$.loginMenues.classList.remove('hidden');
+      },
+      hideLoginMenues: function() {
+        this.$.loginMenues.classList.add('hidden');
       }
     });
   </script>
