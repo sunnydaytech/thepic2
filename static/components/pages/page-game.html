@@ -50,18 +50,22 @@
         args: Object
       },
       attached: function() {
-        var gameBoardEl = document.createElement('game-board');
-        gameBoardEl.id = this.args.id;
-        var width = 550;
-        if (this.offsetWidth < width) {
-          width = this.offsetWidth;
-        }
-        gameBoardEl.style.width = (width - 80) + "px";
-        gameBoardEl.style.margin = '0 40px';
-        gameBoardEl.classList.add('controlled');
+        // use async to make sure the width is correctly mesured.
+        this.async(function() {
+          var gameBoardEl = document.createElement('game-board');
+          gameBoardEl.id = this.args.id;
+          var width = 550;
+          console.log('current width is ' + this.offsetWidth);
+          if (this.offsetWidth < width) {
+            width = this.offsetWidth;
+          }
+          gameBoardEl.style.width = (width - 80) + "px";
+          gameBoardEl.style.margin = '0 40px';
+          gameBoardEl.classList.add('controlled');
 
-        Polymer.dom(this.$.gameContainer).appendChild(gameBoardEl);
-        gameBoardEl.shuffle(100, 1000);
+          Polymer.dom(this.$.gameContainer).appendChild(gameBoardEl);
+          gameBoardEl.shuffle(100, 1000);
+        }, 100);
       }
     });
   </script>

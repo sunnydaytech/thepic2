@@ -1,17 +1,53 @@
 <link rel="import" href="/polymer/polymer.html">
+<link rel="import" href="/components/hot-card.html">
 
 <dom-module id="page-my-pics">
   <style>
     :host {
       display: block;
     }
+    #picsContainer {
+      overflow: auto;
+      white-space:nowrap;
+      width: 100%;
+    }
   </style>
   <template>
-    Hello this page-my-pics.
+    <iron-ajax
+      id="loader"
+      params='{}'
+      handle-as="json"
+      on-response="handlePicResponse"
+      debounce-duration="300"></iron-ajax>
+    <div id="picsContainer"></div>
   </template>
   <script>
     Polymer({
-      is: 'page-my-pics'
+      is: 'page-my-pics',
+      properties: {
+        user: {
+          type: Object,
+          value: window.appConfig.user
+        }
+      },
+      ready: function() {
+        console.log(this.user);
+        this.$.loader.url = '/_/user/' + this.user.id;
+        this.$.loader.generateRequest();
+      },
+      handlePicResponse: function(event) {
+        event.detail.response.forEach(function(resp) {
+          var hotCardEl = document.createElement('hot-card');
+          hotCardEl.hot = resp;
+          var cardWidth = 320;
+          if (window.innerWidth <= 320) {
+            cardWidth = window.innerWidth - 20;
+          }
+          hotCardEl.style.width = cardWidth + "px";
+          hotCardEl.style.height = "500px";
+          this.$.picsContainer.appendChild(hotCardEl);
+        }.bind(this));
+      }
     });
   </script>
 
