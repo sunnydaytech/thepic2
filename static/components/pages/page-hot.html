@@ -23,7 +23,7 @@
   </style>
   <template>
     <iron-ajax
-      auto
+      id="loader"      
       url="/_/hot"
       params='{}'
       handle-as="json"
@@ -35,6 +35,12 @@
   <script>
     Polymer({
       is: 'page-hot',
+      initialized: false,
+      ready: function() {
+        if (!this.initialized) {
+          this.$.loader.generateRequest(); 
+        }
+      },
       handleHotResponse: function(event) {
         var context = this;
         event.detail.response.forEach(function(resp) {
@@ -48,6 +54,7 @@
           hotCardEl.style.height = "500px";
           context.$.picsContainer.appendChild(hotCardEl);
         });
+        this.initialized = true;
       }
     });
   </script>

@@ -19,6 +19,7 @@
   <script>
     Polymer({
       is: 'game-board',
+      initialized: false,
       properties: {
         id: {
           type: String,
@@ -31,6 +32,9 @@
       _DIR : [[-1, 0], [0, 1], [1, 0], [0, -1]],
 
       attached: function() {
+        if (this.initialized) {
+          return;
+        }
         this.imageUrl = this._getResizeImageUrl(this.id, this.offsetWidth);
         this.emptyCol = 0;
         this.emptyRow = 0;
@@ -60,6 +64,7 @@
             this.blocks[i].push(blockEl);
           }
         }
+        this.initialized = true;
       },
 
       _idChanged: function(newId) {

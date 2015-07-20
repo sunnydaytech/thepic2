@@ -82,16 +82,21 @@
   <script>
     Polymer({
       is: 'hot-card',
+      initialized: false,
       properties: {
         imageId: String,
         hot: Object
       },
       attached : function() {
+        if (this.initialized) {
+          return this;
+        }
         var gameBoardEl = document.createElement('game-board');
         gameBoardEl.id = this.hot.id;
         gameBoardEl.style.width = (this.offsetWidth - 80) + "px";
         gameBoardEl.style.margin = '20px';
         this.$.gameContainer.appendChild(gameBoardEl);
+        this.initialized = true;
       },
       handleCardClicked: function() {
         window.location.href = '/#game?id=' + this.hot.id;
