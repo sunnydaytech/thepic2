@@ -16,17 +16,27 @@
     .step-count {
       @apply(--layout-horizontal);
       @apply(--layout-center-justified);
-      margin: 25px 0 25px;
+      margin: 15px 0 0;
     }
     .buttons {
        @apply(--layout-horizontal);
        @apply(--layout-center-justified);
     }
+    #countNumber {
+      font-size: 2.5em;
+      color: grey;
+      display: inline-block;
+      position: relative;
+      padding: 0 4px;
+      top: -20px;
+    }
   </style>
   <template>
-    <span class="step-count">已用xx步</span>
-    <touch-controller id="gameContainer">
-    </touch-controller>
+    <div on-move="handleMove">
+      <div class="step-count">已用<span id="countNumber">0</span>步</div>
+      <touch-controller id="gameContainer">
+      </touch-controller>
+    </div>
     <div class="buttons">
       <index-button 
           src="/img/hint.png"
@@ -47,6 +57,7 @@
     Polymer({
       is: 'page-game',
       initialized: false,
+      stepCount: 0,
       properties: {
         args: Object
       },
@@ -59,18 +70,22 @@
           var gameBoardEl = document.createElement('game-board');
           gameBoardEl.id = this.args.id;
           var width = 550;
-          console.log('current width is ' + this.offsetWidth);
           if (this.offsetWidth < width) {
             width = this.offsetWidth;
           }
           gameBoardEl.style.width = (width - 80) + "px";
           gameBoardEl.style.margin = '0 40px';
+          // So that the gameBoardEl will be notified.
           gameBoardEl.classList.add('controlled');
 
           Polymer.dom(this.$.gameContainer).appendChild(gameBoardEl);
           gameBoardEl.shuffle(1, 1000);
           this.initialized = true;
         }, 100);
+      },
+      handleMove: function() {
+        this.stepCount += 1;
+        this.$.countNumber.textContent = this.stepCount;
       }
     });
   </script>

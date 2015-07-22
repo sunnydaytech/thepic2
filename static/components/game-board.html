@@ -85,9 +85,11 @@
 
       // Move towards direction.
       move : function(direction) {
-        this._move(direction);
-        if (this._isGameOver()) {
-          this._showFullImage();
+        if (this._move(direction)) {
+          if (this._isGameOver()) {
+            this._showFullImage();
+          }
+          this.fire('move');
         }
       },
       _showFullImage: function() {
@@ -161,6 +163,7 @@
 
       /**
        * Moves empty block toward 'direction'.
+       * Returns true if the move succeeds.
        */
       _move : function(direction) {
         var DIR = this._DIR, 
@@ -187,6 +190,9 @@
 
           this.emptyRow = newR;
           this.emptyCol = newC;
+          return true;
+        } else {
+          return false;
         }
       },
 
