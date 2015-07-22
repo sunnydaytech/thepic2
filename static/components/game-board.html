@@ -86,6 +86,19 @@
       // Move towards direction.
       move : function(direction) {
         this._move(direction);
+        if (this._isGameOver()) {
+          this._showFullImage();
+        }
+      },
+      _showFullImage: function() {
+        while (this.hasChildNodes()) {
+          this.removeChild(this.lastChild)
+        }
+        this.style.backgroundImage = 'url(' + this.imageUrl + ')';
+      },
+
+      _isGameOver: function() {
+        return this._disorder() == 0;
       },
 
       _shuffle : function(count, delay, done) {
