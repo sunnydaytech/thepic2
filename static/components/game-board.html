@@ -13,8 +13,13 @@
       border-radius: 4px; 
       border: solid 2px;
     }
+    #happy {
+      height: 100%;
+      background-color: white;  
+    }
   </style>
   <template>
+    <img class="hidden" id="happy" src="/img/happy.png">
   </template>
   <script>
     Polymer({
@@ -58,6 +63,7 @@
             blockEl.style.left = j * perBlockSize + 'px';
             blockEl.style.height = perBlockSize + 'px';
             blockEl.style.width = perBlockSize + 'px';
+            blockEl.style.zIndex = -1;
             blockEl.setAttribute('r', r)
             blockEl.setAttribute('c', c);
             this.appendChild(blockEl);
@@ -88,6 +94,13 @@
         if (this._move(direction)) {
           if (this._isGameOver()) {
             this._showFullImage();
+            var happyImg = document.createElement('img');
+            happyImg.src = '/img/happy.png';
+            happyImg.id = 'happy';
+            happyImg.style.height = "40%";
+            happyImg.style.position = "absolute";
+            happyImg.style.right = "5px";
+            this.appendChild(happyImg);
           }
           this.fire('move');
         }
