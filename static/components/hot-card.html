@@ -32,6 +32,7 @@
     }
     .profile {
       display: inline-block;
+      position: relative;  
     }
     #startGame {
       display: inline-block;
@@ -50,7 +51,30 @@
       color: #E0E0E0;
       border: solid 1px;
     }
-
+    .step-count {
+      text-align: center;
+      color: gray;
+      font-size: 0.9em;
+      position: relative;
+      top: -10px;
+    }
+    #rank .profile {
+      padding: 0 6px;
+    }
+    #fullRank {
+      display: inline-block;
+      color: gray;
+      float: right;
+    }
+    #fullRank img {
+      height: 30px;
+      position: relative;
+      top: -5px;
+    }
+    #fullRank p {
+      position: relative;
+      top: -5px;
+    }
   </style>
   <template>
   <!--
@@ -66,6 +90,18 @@
       <span id="startGame" on-click="handleCardClicked">开始拼图</span>
     </div>
     <div id="gameContainer">
+    </div>
+    <div id="rank">
+      <template is="dom-repeat" items={{hot.imageMetadata.solvedBy}}>
+        <div class="profile">
+          <img src="{{item.profilePic}}"></img>
+          <p class="step-count"><span>{{item.stepCount}}</span>步</p>
+        </div>
+      </template>
+      <div id="fullRank">
+        <img src="/img/badge.png"></img>
+        <p>排行榜</p>
+      </div>
     </div>
     <hr>
     <ol>
