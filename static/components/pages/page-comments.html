@@ -67,13 +67,17 @@
     Polymer({
       is: 'page-comments',
       commentListEl: null,
+      initialized: false,
       properties: {
         args: Object
       },
       attached: function() {
-        this.commentListEl = document.createElement('comment-list');
-        this.commentListEl.id = this.args.id;
-        this.$.commentsContainer.appendChild(this.commentListEl);
+        if (!this.initialized) {
+          this.commentListEl = document.createElement('comment-list');
+          this.commentListEl.id = this.args.id;
+          this.$.commentsContainer.appendChild(this.commentListEl);
+        }
+        this.initialized = true;
       },
       created: function() {
         console.log(this.args);

@@ -53,6 +53,7 @@
   <script>
     Polymer({
       is: 'comment-list',
+      initialized: false,
       properties: {
         id: {
           type: String,
@@ -64,8 +65,11 @@
         }
       },
       attached: function() {
-        this.$.loader.url = '/_/comment/' + this.id;
-        this.$.loader.generateRequest();
+        if (!this.initialized) {
+          this.$.loader.url = '/_/comment/' + this.id;
+          this.$.loader.generateRequest();
+        }
+        this.initialized = true;
       },
       handleLoadCommentsResponse(event) {
         console.log(event.detail.response);
