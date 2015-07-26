@@ -3,18 +3,18 @@
 <link rel="import" href="/components/pages/page-hot.html">
 <link rel="import" href="/components/pages/page-my-pics.html">
 <link rel="import" href="/components/pages/page-game.html">
+<link rel="import" href="/components/pages/page-comments.html">
 <dom-module id="pic-app">
   <style>
   </style>
   <template>
     <div>
       <app-header
+        id="header"
         user={{user}} 
       >
       </app-header>
-      <div id="container">
-        <div></div>
-      </div>
+      <div id="container"></div>
     </div>
   </template>
   <script>
@@ -65,11 +65,14 @@
           newContentEl = this.cache[hash];
         }
         newContentEl.args = args;
-        console.log('args are ' + JSON.stringify(args));
         if (contentEl) {
           this.$.container.replaceChild(newContentEl, contentEl);
+          this.$.header.showBack();
         } else {
           this.$.container.appendChild(newContentEl);
+        }
+        if (elName == 'page-index') {
+          this.$.header.hideBack();
         }
       }
     });

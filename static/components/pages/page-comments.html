@@ -1,0 +1,94 @@
+<link rel="import" href="/polymer/polymer.html">
+<link rel="import" href="/iron-ajax/iron-ajax.html">
+<link rel="import" href="/iron-flex-layout/iron-flex-layout.html">
+
+<link rel="import" href="/components/comment-list.html">
+
+<dom-module id="page-comments">
+  <style>
+    :host {
+      display: block;
+    }
+    ::-webkit-scrollbar { 
+      display: none; 
+    }
+    #commentInputContainer {
+      position: fixed;
+      width: 100%;
+      height: 58px;
+      bottom: 0px;
+      padding: 9px 12px;
+      background-color: #CCCCCC;
+    }
+    #commentInputContainer textarea {
+      height: 40px;
+      padding: 8px;
+      font-size: 1.2em;
+    }
+    #commentsContainer {
+      overflow: scroll;
+      width: 100%;
+    }
+    .comment-input-container {
+      @apply(--layout-horizontal);
+    }
+    .comment-content {
+      @apply(--layout-flex);
+    }
+    #submitComment {
+      color: white;
+      background-color: #ABCA74;
+      line-height: 40px;
+      width: 80px;
+      margin-left: 10px;
+      text-align: center;
+      font-size: 1.2em;
+    }
+    #submitComment:hover {
+      cursor: pointer;
+    }
+  </style>
+  <template>
+    <div id="commentsContainer">
+    </div>
+    <div id="commentInputContainer" class="comment-input-container">
+      <textarea id="commentContent" placeholder="添加评论" class="comment-content"></textarea>
+      <span id="submitComment" on-click="submitComment">发送</span>
+      <iron-ajax
+        id="commentSubmitter"      
+        method="POST"
+        handle-as="json"
+        on-response="handleCommentResponse"
+        debounce-duration="300"></iron-ajax>
+    </div>
+
+  </template>
+  <script>
+    Polymer({
+      is: 'page-comments',
+      commentListEl: null,
+      properties: {
+        args: Object
+      },
+      attached: function() {
+        this.commentListEl = document.createElement('comment-list');
+        this.commentListEl.id = this.args.id;
+        this.$.commentsContainer.appendChild(this.commentListEl);
+      },
+      created: function() {
+        console.log(this.args);
+      },
+      submitComment: function() {
+        var comment = this.$.commentContent.value;
+        this.$.commentContent.value = '';
+        this.$.commentSubmitter.body = 'comment=' + comment;
+        this.$.commentSubmitter.url = '/_/comment/' + this.args.id;
+        this.$.commentSubmitter.generateRequest();
+      },
+      handleCommentResponse: function(e) {
+        console.log('comment resp' + e.detail.response);
+        this.commentListEl.comments = e.detail.response;
+      }
+    });
+  </script>
+</dom-module>

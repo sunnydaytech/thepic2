@@ -16,12 +16,16 @@
       position: absolute;
       height: 30px;
     }
+    #back {
+      height: 30px;
+    }
     .header {
       position: relative;
-      padding-top: 2px;  
+      padding-top: 8px;  
       padding-bottom: 3px;
-      height: 38px;
+      height: 43px;
       border-bottom: solid #DACFCF 1px;
+      line-height: 38px;
     }
     .header .profile-container {
       float: right;
@@ -51,9 +55,18 @@
       left: 65px;
       top: 10px;
     }
+    #spliter {
+      border-right: 1px solid gray;
+      display: inline-block;
+      height: 70%;  
+      position: relative;
+      top: -5px;
+    }
   </style>
   <template>
     <div class="header">
+      <img id="back" class="hidden" on-click="goBack" src="/img/back.png"></img>
+      <span id="spliter" class="hidden"></span>
       <a href="/#">
         <img class="head-logo" src="/img/logo-diamond-180.png">
       </a>
@@ -69,6 +82,17 @@
     Polymer({
       is: 'app-header',
       properties: {
+      },
+      goBack: function(event) {
+        window.history.back();
+      },
+      showBack: function() {
+        this.$.back.classList.remove('hidden');
+        this.$.spliter.classList.remove('hidden');
+      },
+      hideBack: function() {
+        this.$.back.classList.add('hidden');
+        this.$.spliter.classList.add('hidden');
       }
     });
   </script>

@@ -1,0 +1,79 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="/iron-ajax/iron-ajax.html">
+<link rel="import" href="/iron-flex-layout/iron-flex-layout.html">
+
+<dom-module id="comment-list">
+  <style>
+    .comment-item {
+      border-bottom: solid #C7C2C2 1px;
+      @apply(--layout-horizontal);
+      margin: 12px 10px;
+      padding-bottom: 12px;
+    }
+    .comment-item img {
+      border-radius: 50%;
+      height: 40px;
+      display: inline-block;
+      padding-right: 3px;
+    }
+    .comment-content-container {
+      @apply(--layout-flex);
+      padding-left: 13px;
+      display: inline-block;
+    }
+    .display-name {
+      color: #74AAB7;
+      padding-bottom: 3px;  
+    }
+    .comment-content {
+      color: gray;
+    }
+  </style>
+  <template>
+    <iron-ajax
+        id="loader"      
+        url="/_/comment/{{id}}"
+        params='{}'
+        handle-as="json"
+        on-response="handleLoadCommentsResponse"
+        debounce-duration="300"></iron-ajax>
+
+    <ol>
+      <template is="dom-repeat" items={{comments}}>
+        <li class="comment-item">
+          <img src="{{item.user.profilePic}}"></img>
+          <div class="comment-content-container">
+            <span class="display-name">{{item.user.displayName}}</span>
+            <p class="comment-content">{{item.comment}}</p>
+          </div>
+        </li>
+      </template>
+    </ol>
+  </template>
+  <script>
+    Polymer({
+      is: 'comment-list',
+      properties: {
+        id: {
+          type: String,
+          notify: true,
+          observer: 'handleIdChange'
+        },
+        comments: {
+          type: Array
+        }
+      },
+      attached: function() {
+        this.$.loader.url = '/_/comment/' + this.id;
+        this.$.loader.generateRequest();
+      },
+      handleLoadCommentsResponse(event) {
+        console.log(event.detail.response);
+        this.comments = event.detail.response;
+      },
+      handleIdChange: function() {
+        console.log('id is ' + this.id);
+      }
+    });
+  </script>
+</dom-module>

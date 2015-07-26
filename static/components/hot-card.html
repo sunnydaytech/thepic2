@@ -1,5 +1,8 @@
 <link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="/iron-flex-layout/iron-flex-layout.html">
+
 <link rel="import" href="/components/game-board.html">
+<link rel="import" href="/components/comment-list.html">
 
 <dom-module id="hot-card">
   <style>
@@ -14,6 +17,9 @@
       -moz-border-radius: 6px 6px 6px 6px;
       -webkit-border-radius: 6px 6px 6px 6px;
       border: 0px solid #000000;
+    }
+    ::-webkit-scrollbar { 
+      display: none; 
     }
     #gameContainer {
       display: inline-block;
@@ -75,6 +81,19 @@
       position: relative;
       top: -5px;
     }
+    #commentsContainer {
+      overflow: scroll;
+      height: 120px;
+    }
+    .rank {
+      @apply(--layout-horizontal);
+    }
+    .profiles {
+      @apply(--layout-flex);
+    }
+    #commentBar {
+      padding: 10px 0;
+    }
   </style>
   <template>
   <!--
@@ -91,27 +110,27 @@
     </div>
     <div id="gameContainer">
     </div>
-    <div id="rank">
-      <template is="dom-repeat" items={{hot.imageMetadata.solvedBy}}>
-        <div class="profile">
-          <img src="{{item.profilePic}}"></img>
-          <p class="step-count"><span>{{item.stepCount}}</span>步</p>
-        </div>
-      </template>
-      <div id="fullRank">
+    <div id="rank" class="rank">
+      <div class="profiles">
+        <template is="dom-repeat" items={{hot.imageMetadata.solvedBy}}>
+          <div class="profile">
+            <img src="{{item.profilePic}}"></img>
+            <p class="step-count"><span>{{item.stepCount}}</span>步</p>
+          </div>
+        </template>
+      </div>
+      <div id="fullRank" class="full-rank">
         <img src="/img/badge.png"></img>
         <p>排行榜</p>
       </div>
     </div>
     <hr>
-    <ol>
-      <li>
-        comment 1
-      </li>
-      <li>
-        comment 1
-      </li>
-    </ol>
+    <div id="commentBar">
+      <p on-click="checkComments">查看所有<span id="commentCount"> xx</span>条评论</p>
+    </div>
+    <div id="commentsContainer">
+
+    </div>
   </div>
 
   </template>
@@ -121,7 +140,10 @@
       initialized: false,
       properties: {
         imageId: String,
-        hot: Object
+        hot: {
+          type: Object,
+          notify: true
+        }
       },
       attached : function() {
         if (this.initialized) {
@@ -133,9 +155,17 @@
         gameBoardEl.style.margin = '20px';
         this.$.gameContainer.appendChild(gameBoardEl);
         this.initialized = true;
+        this.commentListEl = document.createElement('comment-list');
+        this.commentListEl.id = this.hot.id;
+        this.commentListEl.style.width = this.offsetWidth + 'px';
+        this.$.commentsContainer.appendChild(this.commentListEl);
       },
       handleCardClicked: function() {
         window.location.href = '/#game?id=' + this.hot.id;
+      },
+      checkComments: function(event) {
+        event.stopPropagation();
+        window.location.href = '/#comments?id=' + this.hot.id;
       }
     });
   </script>
