@@ -91,18 +91,20 @@
 
       // Move towards direction.
       move : function(direction) {
-        if (this._move(direction)) {
-          if (this._isGameOver()) {
-            this._showFullImage();
-            var happyImg = document.createElement('img');
-            happyImg.src = '/img/happy.png';
-            happyImg.id = 'happy';
-            happyImg.style.height = "40%";
-            happyImg.style.position = "absolute";
-            happyImg.style.right = "5px";
-            this.appendChild(happyImg);
+        if (!this._isGameOver()) {
+          if (this._move(direction)) {
+            if (this._isGameOver()) {
+              this._showFullImage();
+              var happyImg = document.createElement('img');
+              happyImg.src = '/img/happy.png';
+              happyImg.id = 'happy';
+              happyImg.style.height = "40%";
+              happyImg.style.position = "absolute";
+              happyImg.style.right = "5px";
+              this.appendChild(happyImg);
+            }
+            this.fire('move');
           }
-          this.fire('move');
         }
       },
       _showFullImage: function() {

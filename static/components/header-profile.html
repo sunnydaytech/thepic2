@@ -59,11 +59,31 @@
     .login-icons index-button {
       padding: 5px;
     }
+    #profilePicContainer {
+      position: relative;
+      display: inline-block;
+    }
+    #notificationCount {
+      border-radius: 50%;
+      height: 40px;
+      width: 20px;
+      text-align: center;
+      font-size: 0.8em;
+      color: #FB1515;
+      position: absolute;
+      right: 0px;
+      top: -9px;
+      font-size: 1.1em;
+      font-weight: bold;
+    }
   </style> 
   <template>
     <div class="profile">
-      <a href="/user/{{user.id}}>">
-        <img src="{{user.profilePic}}">
+      <a href="/#notification">
+        <div id="profilePicContainer">
+          <img src="{{user.profilePic}}">
+          <div id="notificationCount" class="hidden">{{user.notificationCount}}</div>
+        </div>
         <span>{{user.displayName}}</span>
       </a>
     </div>
@@ -107,6 +127,9 @@
             displayName: 'Guest',
             profilePic: '/img/guest-profile.png'
           }
+        }
+        if (this.user.notificationCount) {
+          this.$.notificationCount.classList.remove('hidden');
         }
       },
 

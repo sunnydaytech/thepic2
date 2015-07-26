@@ -40,6 +40,7 @@
         if (!this.initialized) {
           this.$.loader.generateRequest(); 
         }
+        this.initialized = true;
       },
       handleHotResponse: function(event) {
         var context = this;
@@ -51,7 +52,6 @@
             cardWidth = window.innerWidth - 20;
           }
           hotCardEl.style.width = cardWidth + "px";
-          hotCardEl.style.height = "600px";
           context.$.picsContainer.appendChild(hotCardEl);
         });
         this.initialized = true;
