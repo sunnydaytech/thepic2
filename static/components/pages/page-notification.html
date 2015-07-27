@@ -3,6 +3,21 @@
 
 <dom-module id="page-notification">
   <style>
+    .notification-item {
+      height: 50px;
+      border-bottom: solid 1px gray;
+      margin: 10px;
+    }
+    .notification-item img {
+      border-radius: 50%;
+      height: 40px;
+      display: inline-block;
+      padding-right: 3px;
+    }
+    .notification-item .content {
+      display: inline-block;
+      padding-left: 5px;
+    }
   </style>
   <template>
     <iron-ajax
@@ -15,9 +30,14 @@
       debounce-duration="300"></iron-ajax>
       <ul>
         <template is="dom-repeat" items="[[notification.notifications]]">
-          <li>
+          <li class="notification-item">
             <img src="{{item.sender.profilePic}}">
-            <span>{{item.sender.displayName}}</span><span>{{item|notificationTitle}}</span>
+            <div class="content">
+              <p>
+              <span>{{item.sender.displayName}}</span><span>{{ notificationTitle(item) }}</span>
+              </p>
+              <p>{{notificationContent(item)}}</p>
+            </div>
           </li>
         </template>
       </ul>
@@ -26,11 +46,19 @@
     Polymer({
       is: 'page-notification',
       notificationTitle: function(notification) {
-        if (notification.type == 2) { // comment
-          return "评论了你的图片";
-        } else {
-          return '拼出了你的图片';
+        if (notification) {
+          if (notification.type == 2) { // comment
+            return "评论了你的图片";
+          } else {
+            return '拼出了你的图片';
+          }
         }
+      },
+      notificationContent: function(notification) {
+        if (notification.type == 2) {
+          return notification.comment;
+        }
+        return ' ';
       }
     });
   </script>
