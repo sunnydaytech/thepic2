@@ -1,16 +1,37 @@
 <link rel="import" href="/polymer/polymer.html">
+<link rel="import" href="/iron-ajax/iron-ajax.html">
 
 <dom-module id="page-notification">
   <style>
   </style>
   <template>
-    <div>
-      Hello this is notification.
-    </div>
+    <iron-ajax
+      id="loader"      
+      url="/_/notification"
+      auto
+      params='{}'
+      handle-as="json"
+      last-response="{{notification}}"
+      debounce-duration="300"></iron-ajax>
+      <ul>
+        <template is="dom-repeat" items="[[notification.notifications]]">
+          <li>
+            <img src="{{item.sender.profilePic}}">
+            <span>{{item.sender.displayName}}</span><span>{{item|notificationTitle}}</span>
+          </li>
+        </template>
+      </ul>
   </template>
   <script>
     Polymer({
-      is: 'page-notification'
+      is: 'page-notification',
+      notificationTitle: function(notification) {
+        if (notification.type == 2) { // comment
+          return "评论了你的图片";
+        } else {
+          return '拼出了你的图片';
+        }
+      }
     });
   </script>
 </dom-module>
