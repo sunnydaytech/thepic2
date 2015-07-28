@@ -37,10 +37,10 @@
       auto
       params='{}'
       handle-as="json"
-      last-response="{{notification}}"
+      on-response="handleNotification"
       debounce-duration="300"></iron-ajax>
       <ul>
-        <template is="dom-repeat" items="[[notification.notifications]]">
+        <template is="dom-repeat" items="{{notification.notifications}}">
           <li class="notification-item" on-click="onNotificationClicked">
             <img class="profile" src="{{item.sender.profilePic}}">
             <div class="content">
@@ -57,6 +57,12 @@
   <script>
     Polymer({
       is: 'page-notification',
+      properties: {
+        notification: {
+          type: Object,
+          notify: true
+        }
+      },
       notificationTitle: function(notification) {
         if (notification) {
           if (notification.type == 2) { // comment
@@ -65,6 +71,9 @@
             return ' 拼出了你的图片';
           }
         }
+      },
+      handleNotification: function(e) {
+        this.notification = e.detail.response;
       },
       onNotificationClicked: function(e) {
         var notification = e.model.item;
