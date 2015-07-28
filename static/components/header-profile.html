@@ -8,6 +8,7 @@
     .profile {
       height: 40px;
       display: inline-block;
+      position: relative;
     }
     .profile a {
       display: inline-block;
@@ -64,15 +65,17 @@
       display: inline-block;
     }
     #notificationCount {
+      z-index: 10;
+      background-color: rgba(253, 26, 26, 0.7);
       border-radius: 50%;
-      height: 40px;
-      width: 20px;
+      height: 10px;
+      width: 10px;
       text-align: center;
       font-size: 0.8em;
       color: #FB1515;
       position: absolute;
-      right: 0px;
-      top: -9px;
+      right: 1px;
+      top: 1px;
       font-size: 1.1em;
       font-weight: bold;
     }
@@ -82,9 +85,9 @@
       <a href="/#notification">
         <div id="profilePicContainer">
           <img src="{{user.profilePic}}">
-          <div id="notificationCount" class="hidden">{{user.notificationCount}}</div>
         </div>
         <span>{{user.displayName}}</span>
+        <div id="notificationCount" class="hidden"></div>
       </a>
     </div>
     <span id="loginButton" on-click="showLoginMenues">

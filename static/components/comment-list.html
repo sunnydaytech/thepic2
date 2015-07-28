@@ -72,11 +72,9 @@
         this.initialized = true;
       },
       handleLoadCommentsResponse(event) {
-        console.log(event.detail.response);
         this.comments = event.detail.response;
       },
       handleIdChange: function() {
-        console.log('id is ' + this.id);
       }
     });
   </script>
