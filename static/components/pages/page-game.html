@@ -30,27 +30,52 @@
       padding: 0 4px;
       top: -20px;
     }
+    #hint {
+    }
+    #hint #container {
+      padding-top: 30px;
+      position: relative; 
+    }
+    #buddy {
+      position: relative;
+      height: 120px;
+      left: 22px;
+      top: 10px;
+      z-index: -1;
+    }
   </style>
   <template>
     <div on-move="handleMove">
-      <div class="step-count">已用<span id="countNumber">0</span>步</div>
+      <div class="step-count">已用<span id="countNumber">{{stepCount}}</span>步</div>
       <touch-controller id="gameContainer">
       </touch-controller>
     </div>
-    <div class="buttons">
-      <index-button 
-          src="/img/hint.png"
-          button-text="原图提示">
-      </index-button>
-      <index-button 
-          src="/img/restart.png"
-          button-text="重玩一次">
-      </index-button>
+    <div>
+      <div id="buttons" class="buttons">
+        <index-button 
+            on-click="handleHint" 
+            src="/img/hint.png"
+            button-text="原图提示">
+        </index-button>
+        <index-button 
+            on-click="handleReset"
+            src="/img/restart.png"
+            button-text="重玩一次">
+        </index-button>
 
-      <index-button 
-          src="/img/give-up.png"
-          button-text="我要放弃">
-      </index-button>
+        <index-button 
+            on-click="handleGiveup"
+            src="/img/give-up.png"
+            button-text="我要放弃">
+        </index-button>
+      </div>
+
+      <div id="hint" class="hidden">
+        <div id="container">
+          <img id="buddy" src="/img/hint-buddy.png">
+          <img id="original" src="{{_getResizeImageUrl(args.id, 120)}}"
+        </div>
+      </div>
     </div>
   </template>
   <script>
@@ -58,8 +83,13 @@
       is: 'page-game',
       initialized: false,
       stepCount: 0,
+      gameBoardEl: null,
       properties: {
-        args: Object
+        args: Object,
+        stepCount: {
+          type:  Number,
+          value: 0
+        }
       },
       attached: function() {
         if (this.initialized) {
@@ -67,26 +97,48 @@
         }
         // use async to make sure the width is correctly mesured.
         this.async(function() {
-          var gameBoardEl = document.createElement('game-board');
-          gameBoardEl.id = this.args.id;
+          this.gameBoardEl = document.createElement('game-board');
+          this.gameBoardEl.id = this.args.id;
           var width = 550;
           if (this.offsetWidth < width) {
             width = this.offsetWidth;
           }
-          gameBoardEl.style.width = (width - 80) + "px";
-          gameBoardEl.style.margin = '0 40px';
+          this.gameBoardEl.style.width = (width - 80) + "px";
+          this.gameBoardEl.style.margin = '0 40px';
           // So that the gameBoardEl will be notified.
-          gameBoardEl.classList.add('controlled');
+          this.gameBoardEl.classList.add('controlled');
 
-          Polymer.dom(this.$.gameContainer).appendChild(gameBoardEl);
-          gameBoardEl.shuffle(100, 1000);
+          Polymer.dom(this.$.gameContainer).appendChild(this.gameBoardEl);
+          this.gameBoardEl.shuffle(100, 1000);
           this.initialized = true;
         }, 100);
       },
       handleMove: function() {
         this.stepCount += 1;
-        this.$.countNumber.textContent = this.stepCount;
-      }
+      },
+      handleReset: function() {
+        this.stepCount = 0;
+        this.gameBoardEl.shuffle(100, 1000);
+      },
+      handleHint: function() {
+        this.$.buttons.classList.add('hidden');
+        this.$.hint.classList.remove('hidden');
+        setTimeout(function() {
+          this.$.buttons.classList.remove('hidden');
+          this.$.hint.classList.add('hidden');
+        }.bind(this), 1000);
+      },
+      handleGiveup: function() {
+        var giveupImgEl = this.create('img', {'src': '/img/sad.png'}); 
+        giveupImgEl.style.display = 'block';
+        giveupImgEl.style.margin = '0 auto';
+        giveupImgEl.style.height = '300px';
+        this.$.gameContainer.replaceChild(giveupImgEl, this.gameBoardEl);
+      },
+      _getResizeImageUrl: function(imageId, size) {
+         return 'http://res.cloudinary.com/sunnydaytech/image/upload/c_fill,h_' + 
+           size + ',w_' + size + '/' + imageId;
+      },
     });
   </script>
 </dom-module>
