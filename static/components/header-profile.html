@@ -23,34 +23,50 @@
       position: relative;  
       bottom: 12px;
     }
+    .profile a {
+      text-decoration: none;
+    }
 
     #loginButton {
       display: inline-block;
       position: relative;
       bottom: 12px;
     }
-
-    #loginMenues {
-      @apply(--layout-vertical);
-      @apply(--layout-center-justified);
+    
+    #menuContainer {
       position: fixed;
-      min-height: 70px;
       left: 0px;
-      bottom: 0px;
-      right: 0px;
-      border: 1px solid;  
-      padding: 5px;
-      background-color: white;
-      z-index: 100;
-    }
-    #loginMenues p {
-      margin: 8px auto;
-      font-size: 1.2em;
-    }
-    #close {
-      position: absolute;
       right: 0px;
       top: 0px;
+      height: 100%;
+      z-index: 10;
+      background: rgba(128, 128, 128, 0.49);
+    }
+
+    #loginMenues {
+      @apply(--layout-center-justified);
+      @apply(--layout-vertical);
+      background-color: white;
+      bottom: 0px;
+      left: 0px;
+      min-height: 70px;
+      padding: 25px;
+      position: fixed;
+      right: 0px;
+      z-index: 100;
+    }
+    #menu-row {
+      text-align: center;
+    }
+    #menu-row p {
+      display: inline-block;
+      margin: 0px auto;
+      font-size: 1.2em;
+      color: gray;
+    }
+    #close {
+      float: right;
+      height: 30px;
     }
     .login-icons {
       @apply(--layout-horizontal);
@@ -94,22 +110,26 @@
         | Login
     </span>
 
-    <div id="loginMenues" class="hidden">
-      <div id="close" on-click="hideLoginMenues">X</div>
-      <p>登陆</p>
-      <div class="login-icons">
-        <index-button 
-          src="/img/twitter.jpg"
-          href="/auth/twitter"
-          button-text="Twitter"></index-button>
-        <index-button 
-          src="/img/facebook.jpg"
-          href="/auth/facebook"
-          button-text="Facebook"></index-button>
-        <index-button 
-          src="/img/weibo.jpg"
-          href="/auth/weibo"
-          button-text="Weibo"></index-button>
+    <div id="menuContainer" class="hidden">
+      <div id="loginMenues" >
+        <div id="menu-row">
+          <img id="close" on-click="hideLoginMenues" src="/img/close.jpg">
+          <p>登陆</p>
+        </div>
+        <div class="login-icons">
+          <index-button 
+            src="/img/twitter.jpg"
+            href="/auth/twitter"
+            button-text="Twitter"></index-button>
+          <index-button 
+            src="/img/facebook.jpg"
+            href="/auth/facebook"
+            button-text="Facebook"></index-button>
+          <index-button 
+            src="/img/weibo.jpg"
+            href="/auth/weibo"
+            button-text="Weibo"></index-button>
+        </div>
       </div>
     </div>
   </template>
@@ -137,10 +157,10 @@
       },
 
       showLoginMenues: function() {
-        this.$.loginMenues.classList.remove('hidden');
+        this.$.menuContainer.classList.remove('hidden');
       },
       hideLoginMenues: function() {
-        this.$.loginMenues.classList.add('hidden');
+        this.$.menuContainer.classList.add('hidden');
       }
     });
   </script>
