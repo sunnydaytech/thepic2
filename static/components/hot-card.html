@@ -113,7 +113,7 @@
     </div>
     <div id="rank" class="rank">
       <div class="profiles">
-        <template is="dom-repeat" items={{hot.imageMetadata.solvedBy}}>
+        <template is="dom-repeat" id="solvedProfiles" items={{hot.imageMetadata.solvedBy}}>
           <div class="profile">
             <img src="{{item.profilePic}}"></img>
             <p class="step-count"><span>{{item.stepCount}}</span>步</p>
@@ -160,6 +160,7 @@
         this.commentListEl.id = this.hot.id;
         this.commentListEl.style.width = this.offsetWidth + 'px';
         this.$.commentsContainer.appendChild(this.commentListEl);
+        this.$.solvedProfiles.render();
       },
       handleCardClicked: function() {
         window.location.href = '/#game?id=' + this.hot.id;
