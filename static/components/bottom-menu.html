@@ -1,0 +1,68 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="/iron-flex-layout/iron-flex-layout.html">
+
+<dom-module id="bottom-menu">
+  <style>
+    #menuContainer {
+      position: fixed;
+      left: 0px;
+      right: 0px;
+      top: 0px;
+      height: 100%;
+      z-index: 10;
+      background: rgba(128, 128, 128, 0.49);
+    }
+    #loginMenues {
+      @apply(--layout-center-justified);
+      @apply(--layout-vertical);
+      background-color: white;
+      bottom: 0px;
+      left: 0px;
+      min-height: 70px;
+      padding: 25px;
+      position: fixed;
+      right: 0px;
+      z-index: 100;
+    }
+    #menu-row {
+      text-align: center;
+    }
+    #menu-row p {
+      display: inline-block;
+      margin: 0px auto;
+      font-size: 1.2em;
+      color: gray;
+    }
+    #close {
+      float: right;
+      height: 30px;
+    }
+  </style>
+  <template>
+    <div id="menuContainer">
+      <div id="loginMenues" >
+        <div id="menu-row">
+          <img id="close" on-click="hideLoginMenues" src="/img/close.jpg">
+          <p>{{title}}</p>
+        </div>
+        <content></content> 
+      </div>
+    </div>
+  </template>
+  <script>
+    Polymer({
+      is: 'bottom-menu',
+      properties: {
+        title: String
+      },
+      hideLoginMenues: function() {
+        this.toggleClass('hidden');
+      },
+      showLoginMenues: function() {
+        this.toggleClass('hidden');
+      }
+    });
+  </script>
+</dom-module>
+
+

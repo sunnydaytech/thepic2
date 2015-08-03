@@ -1,5 +1,8 @@
 <link rel="import" href="../polymer/polymer.html">
 
+<link rel="import" href="/components/bottom-menu.html">
+
+
 <dom-module id="header-profile">
   <style>
     :host {
@@ -31,42 +34,6 @@
       display: inline-block;
       position: relative;
       bottom: 12px;
-    }
-    
-    #menuContainer {
-      position: fixed;
-      left: 0px;
-      right: 0px;
-      top: 0px;
-      height: 100%;
-      z-index: 10;
-      background: rgba(128, 128, 128, 0.49);
-    }
-
-    #loginMenues {
-      @apply(--layout-center-justified);
-      @apply(--layout-vertical);
-      background-color: white;
-      bottom: 0px;
-      left: 0px;
-      min-height: 70px;
-      padding: 25px;
-      position: fixed;
-      right: 0px;
-      z-index: 100;
-    }
-    #menu-row {
-      text-align: center;
-    }
-    #menu-row p {
-      display: inline-block;
-      margin: 0px auto;
-      font-size: 1.2em;
-      color: gray;
-    }
-    #close {
-      float: right;
-      height: 30px;
     }
     .login-icons {
       @apply(--layout-horizontal);
@@ -110,28 +77,22 @@
         | Login
     </span>
 
-    <div id="menuContainer" class="hidden">
-      <div id="loginMenues" >
-        <div id="menu-row">
-          <img id="close" on-click="hideLoginMenues" src="/img/close.jpg">
-          <p>登陆</p>
-        </div>
-        <div class="login-icons">
-          <index-button 
-            src="/img/twitter.jpg"
-            href="/auth/twitter"
-            button-text="Twitter"></index-button>
-          <index-button 
-            src="/img/facebook.jpg"
-            href="/auth/facebook"
-            button-text="Facebook"></index-button>
-          <index-button 
-            src="/img/weibo.jpg"
-            href="/auth/weibo"
-            button-text="Weibo"></index-button>
-        </div>
+    <bottom-menu id="bottomMenu" title="登陆" class="hidden">
+      <div class="login-icons">
+        <index-button 
+          src="/img/twitter.jpg"
+          href="/auth/twitter"
+          button-text="Twitter"></index-button>
+        <index-button 
+          src="/img/facebook.jpg"
+          href="/auth/facebook"
+          button-text="Facebook"></index-button>
+        <index-button 
+          src="/img/weibo.jpg"
+          href="/auth/weibo"
+          button-text="Weibo"></index-button>
       </div>
-    </div>
+    </bottom-menu>
   </template>
   <script>
     Polymer({
@@ -157,10 +118,10 @@
       },
 
       showLoginMenues: function() {
-        this.$.menuContainer.classList.remove('hidden');
+        this.$.bottomMenu.toggleClass('hidden');
       },
       hideLoginMenues: function() {
-        this.$.menuContainer.classList.add('hidden');
+        this.$.bottomMenu.toggleClass('hidden');
       }
     });
   </script>
