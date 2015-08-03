@@ -148,6 +148,7 @@
       },
       attached : function() {
         if (this.initialized) {
+          this.$.solvedProfiles.render();
           return this;
         }
         var gameBoardEl = document.createElement('game-board');
@@ -160,7 +161,6 @@
         this.commentListEl.id = this.hot.id;
         this.commentListEl.style.width = this.offsetWidth + 'px';
         this.$.commentsContainer.appendChild(this.commentListEl);
-        this.$.solvedProfiles.render();
       },
       handleCardClicked: function() {
         window.location.href = '/#game?id=' + this.hot.id;
