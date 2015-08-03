@@ -63,6 +63,15 @@
           notify: true
         }
       },
+      ready: function() {
+        console.log(this.notification);
+      },
+      attached: function() {
+        console.log(this.notification);
+      },
+      attached: function() {
+        console.log(this.notification);
+      },
       notificationTitle: function(notification) {
         if (notification) {
           if (notification.type == 2) { // comment

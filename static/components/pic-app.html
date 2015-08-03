@@ -67,10 +67,10 @@
         }
         newContentEl.args = args;
         if (contentEl) {
-          this.$.container.replaceChild(newContentEl, contentEl);
+          Polymer.dom(this.$.container).replaceChild(newContentEl, contentEl);
           this.$.header.showBack();
         } else {
-          this.$.container.appendChild(newContentEl);
+          Polymer.dom(this.$.container).appendChild(newContentEl);
         }
         if (elName == 'page-index') {
           this.$.header.hideBack();
