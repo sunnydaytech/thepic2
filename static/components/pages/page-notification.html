@@ -40,7 +40,7 @@
       on-response="handleNotification"
       debounce-duration="300"></iron-ajax>
       <ul>
-        <template is="dom-repeat" items="{{notification.notifications}}">
+        <template is="dom-repeat" id="notificationList" items="{{notification.notifications}}">
           <li class="notification-item" on-click="onNotificationClicked">
             <img class="profile" src="{{item.sender.profilePic}}">
             <div class="content">
@@ -67,10 +67,7 @@
         console.log(this.notification);
       },
       attached: function() {
-        console.log(this.notification);
-      },
-      attached: function() {
-        console.log(this.notification);
+        this.$.notificationList.render();
       },
       notificationTitle: function(notification) {
         if (notification) {
