@@ -160,7 +160,7 @@
         this.commentListEl = document.createElement('comment-list');
         this.commentListEl.id = this.hot.id;
         this.commentListEl.style.width = this.offsetWidth + 'px';
-        this.$.commentsContainer.appendChild(this.commentListEl);
+        Polymer.dom(this.$.commentsContainer).appendChild(this.commentListEl);
       },
       handleCardClicked: function() {
         window.location.href = '/#game?id=' + this.hot.id;
