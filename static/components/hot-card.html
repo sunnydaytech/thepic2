@@ -138,6 +138,9 @@
   <script>
     Polymer({
       is: 'hot-card',
+      factoryImpl: function(hot) {
+        this.hot = hot;
+      },
       initialized: false,
       properties: {
         imageId: String,
@@ -151,14 +154,12 @@
           this.$.solvedProfiles.render();
           return this;
         }
-        var gameBoardEl = document.createElement('game-board');
-        gameBoardEl.id = this.hot.id;
+        var gameBoardEl = new GameBoard(this.hot.id);
         gameBoardEl.style.width = (this.offsetWidth - 80) + "px";
         gameBoardEl.style.margin = '20px';
         this.$.gameContainer.appendChild(gameBoardEl);
         this.initialized = true;
-        this.commentListEl = document.createElement('comment-list');
-        this.commentListEl.id = this.hot.id;
+        this.commentListEl = new CommentList(this.hot.id);
         this.commentListEl.style.width = this.offsetWidth + 'px';
         Polymer.dom(this.$.commentsContainer).appendChild(this.commentListEl);
       },

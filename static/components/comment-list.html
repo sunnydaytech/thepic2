@@ -39,7 +39,7 @@
         debounce-duration="300"></iron-ajax>
 
     <ol>
-      <template is="dom-repeat" items={{comments}}>
+      <template is="dom-repeat" id="comments" items={{comments}}>
         <li class="comment-item">
           <img src="{{item.user.profilePic}}"></img>
           <div class="comment-content-container">
@@ -53,6 +53,9 @@
   <script>
     Polymer({
       is: 'comment-list',
+      factoryImpl: function(id) {
+        this.id = id;
+      },
       initialized: false,
       properties: {
         id: {
@@ -68,13 +71,13 @@
         if (!this.initialized) {
           this.$.loader.url = '/_/comment/' + this.id;
           this.$.loader.generateRequest();
+          this.initialized = true;
+        } else {
+          this.$.comments.render();
         }
-        this.initialized = true;
       },
       handleLoadCommentsResponse(event) {
         this.comments = event.detail.response;
-      },
-      handleIdChange: function() {
       }
     });
   </script>

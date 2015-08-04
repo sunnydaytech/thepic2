@@ -24,6 +24,9 @@
   <script>
     Polymer({
       is: 'game-board',
+      factoryImpl: function(id) {
+        this.id = id;
+      },
       initialized: false,
       properties: {
         id: {
