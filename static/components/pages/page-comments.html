@@ -50,7 +50,7 @@
   </style>
   <template>
     <div id="commentsContainer">
-      <comment-list image-id="[[args.id]]">
+      <comment-list id="commentList" image-id="[[args.id]]">
       </comment-list>
     </div>
     <div id="commentInputContainer" class="comment-input-container">
@@ -81,8 +81,7 @@
         this.$.commentSubmitter.generateRequest();
       },
       handleCommentResponse: function(e) {
-        console.log('comment resp' + e.detail.response);
-        this.commentListEl.comments = e.detail.response;
+        this.$.commentList.comments = e.detail.response;
       }
     });
   </script>
