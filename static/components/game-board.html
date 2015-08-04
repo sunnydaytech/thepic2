@@ -24,26 +24,18 @@
   <script>
     Polymer({
       is: 'game-board',
-      factoryImpl: function(id) {
-        this.id = id;
-      },
-      initialized: false,
       properties: {
-        id: {
+        imageId: {
           type: String,
           notify: true,
-          observer: '_idChanged'
         }
       },
 
       // Constants for directions.
       _DIR : [[-1, 0], [0, 1], [1, 0], [0, -1]],
 
-      attached: function() {
-        if (this.initialized) {
-          return;
-        }
-        this.imageUrl = this._getResizeImageUrl(this.id, this.offsetWidth);
+      render: function() {
+        this.imageUrl = this._getResizeImageUrl(this.imageId, this.offsetWidth);
         this.emptyCol = 0;
         this.emptyRow = 0;
         this.blockNum = 3,
@@ -73,11 +65,6 @@
             this.blocks[i].push(blockEl);
           }
         }
-        this.initialized = true;
-      },
-
-      _idChanged: function(newId) {
-        console.log(event);
       },
 
       /**

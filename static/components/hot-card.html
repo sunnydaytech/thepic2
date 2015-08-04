@@ -23,7 +23,10 @@
       display: none; 
     }
     #gameContainer {
-      display: inline-block;
+      display: block;
+    }
+    #gameContainer game-board {
+      margin: 20px;
     }
     .profile {
       height: 40px;
@@ -97,10 +100,6 @@
     }
   </style>
   <template>
-  <!--
-  <span>{{hot.id}}</span>
-  <span>{{hot.url}}</span>
-  -->
   <div on-click="handleCardClicked">
     <div id="metaBar">
       <div class="profile">
@@ -110,6 +109,8 @@
       <span id="startGame" on-click="handleCardClicked">开始拼图</span>
     </div>
     <div id="gameContainer">
+      <game-board id="gameBoard" image-id="[[hot.id]]">
+      </game-board>
     </div>
     <div id="rank" class="rank">
       <div class="profiles">
@@ -130,7 +131,8 @@
       <p on-click="checkComments">查看所有<span id="commentCount"></span>条评论</p>
     </div>
     <div id="commentsContainer">
-
+      <comment-list image-id="[[hot.id]]">
+      </comment-list>
     </div>
   </div>
 
@@ -138,26 +140,14 @@
   <script>
     Polymer({
       is: 'hot-card',
-      factoryImpl: function(hot) {
-        this.hot = hot;
-      },
-      initialized: false,
       properties: {
-        imageId: String,
         hot: {
           type: Object,
-          notify: true
+          notify: true,
         }
       },
-      ready: function() {
-        var gameBoardEl = new GameBoard(this.hot.id);
-        gameBoardEl.style.width = (this.offsetWidth - 80) + "px";
-        gameBoardEl.style.margin = '20px';
-        this.$.gameContainer.appendChild(gameBoardEl);
-        this.initialized = true;
-        this.commentListEl = new CommentList(this.hot.id);
-        this.commentListEl.style.width = this.offsetWidth + 'px';
-        Polymer.dom(this.$.commentsContainer).appendChild(this.commentListEl);
+      attached: function() {
+        this.$.gameBoard.render();
       },
       handleCardClicked: function() {
         window.location.href = '/#game?id=' + this.hot.id;

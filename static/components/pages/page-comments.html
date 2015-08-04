@@ -50,6 +50,8 @@
   </style>
   <template>
     <div id="commentsContainer">
+      <comment-list image-id="[[args.id]]">
+      </comment-list>
     </div>
     <div id="commentInputContainer" class="comment-input-container">
       <textarea id="commentContent" placeholder="添加评论" class="comment-content"></textarea>
@@ -70,17 +72,6 @@
       initialized: false,
       properties: {
         args: Object
-      },
-      attached: function() {
-        if (!this.initialized) {
-          this.commentListEl = document.createElement('comment-list');
-          this.commentListEl.id = this.args.id;
-          this.$.commentsContainer.appendChild(this.commentListEl);
-        }
-        this.initialized = true;
-      },
-      created: function() {
-        console.log(this.args);
       },
       submitComment: function() {
         var comment = this.$.commentContent.value;

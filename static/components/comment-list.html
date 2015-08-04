@@ -32,14 +32,12 @@
   <template>
     <iron-ajax
         id="loader"      
-        url="/_/comment/{{id}}"
         params='{}'
         handle-as="json"
-        on-response="handleLoadCommentsResponse"
+        last-response="{{comments}}"
         debounce-duration="300"></iron-ajax>
-
     <ol>
-      <template is="dom-repeat" id="comments" items={{comments}}>
+      <template is="dom-repeat" id="comments" items="[[comments]]">
         <li class="comment-item">
           <img src="{{item.user.profilePic}}"></img>
           <div class="comment-content-container">
@@ -53,31 +51,25 @@
   <script>
     Polymer({
       is: 'comment-list',
-      factoryImpl: function(id) {
-        this.id = id;
-      },
       initialized: false,
       properties: {
-        id: {
+        imageId: {
           type: String,
           notify: true,
-          observer: 'handleIdChange'
+          observer: '_imageIdChanged'
         },
         comments: {
           type: Array
         }
       },
-      attached: function() {
-        if (!this.initialized) {
-          this.$.loader.url = '/_/comment/' + this.id;
+      _imageIdChanged: function() {
+        if (this.imageId) {
+          this.$.loader.url = this.commentsUrl();
           this.$.loader.generateRequest();
-          this.initialized = true;
-        } else {
-          this.$.comments.render();
         }
       },
-      handleLoadCommentsResponse(event) {
-        this.comments = event.detail.response;
+      commentsUrl: function() {
+        return '/_/comment/' + this.imageId;
       }
     });
   </script>
