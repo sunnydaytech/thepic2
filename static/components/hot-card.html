@@ -149,11 +149,7 @@
           notify: true
         }
       },
-      attached : function() {
-        if (this.initialized) {
-          this.$.solvedProfiles.render();
-          return this;
-        }
+      ready: function() {
         var gameBoardEl = new GameBoard(this.hot.id);
         gameBoardEl.style.width = (this.offsetWidth - 80) + "px";
         gameBoardEl.style.margin = '20px';
