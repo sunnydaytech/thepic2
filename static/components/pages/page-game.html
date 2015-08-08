@@ -12,6 +12,7 @@
     #gameContainer {
       margin: 0 auto;
       max-width: 550px;
+      padding: 0 30px;
     }
     .step-count {
       @apply(--layout-horizontal);
@@ -48,6 +49,8 @@
     <div on-move="handleMove">
       <div class="step-count">已用<span id="countNumber">{{stepCount}}</span>步</div>
       <touch-controller id="gameContainer">
+        <game-board id="gameBoard" class="controlled" image-id="[[args.id]]">
+        </game-board>
       </touch-controller>
     </div>
     <div>
@@ -92,26 +95,10 @@
         }
       },
       attached: function() {
-        if (this.initialized) {
-          return;
-        }
-        // use async to make sure the width is correctly mesured.
-        this.async(function() {
-          this.gameBoardEl = document.createElement('game-board');
-          this.gameBoardEl.id = this.args.id;
-          var width = 550;
-          if (this.offsetWidth < width) {
-            width = this.offsetWidth;
-          }
-          this.gameBoardEl.style.width = (width - 80) + "px";
-          this.gameBoardEl.style.margin = '0 40px';
-          // So that the gameBoardEl will be notified.
-          this.gameBoardEl.classList.add('controlled');
-
-          Polymer.dom(this.$.gameContainer).appendChild(this.gameBoardEl);
-          this.gameBoardEl.shuffle(100, 1000);
-          this.initialized = true;
-        }, 100);
+        setTimeout(function() {
+          this.$.gameBoard.render();
+          this.$.gameBoard.shuffle(100, 1000);
+        }.bind(this), 500);
       },
       handleMove: function() {
         this.stepCount += 1;
