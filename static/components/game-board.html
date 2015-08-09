@@ -92,11 +92,13 @@
               happyImg.style.position = "absolute";
               happyImg.style.right = "5px";
               this.appendChild(happyImg);
+              this.fire('game-solved');
             }
             this.fire('move');
           }
         }
       },
+      
       _showFullImage: function() {
         while (this.hasChildNodes()) {
           this.removeChild(this.lastChild)

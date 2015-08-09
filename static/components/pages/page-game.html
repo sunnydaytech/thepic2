@@ -46,7 +46,7 @@
     }
   </style>
   <template>
-    <div on-move="handleMove">
+    <div on-move="handleMove" on-game-solved="handleGameSolved">
       <div class="step-count">已用<span id="countNumber">{{stepCount}}</span>步</div>
       <touch-controller id="gameContainer">
         <game-board id="gameBoard" class="controlled" image-id="[[args.id]]">
@@ -80,6 +80,13 @@
         </div>
       </div>
     </div>
+    <iron-ajax
+      id="solveGame"
+      method="POST"
+      handle-as="json"
+      url="{{_solveGameUrl(args.id)}}">
+    </iron-ajax>
+
   </template>
   <script>
     Polymer({
@@ -97,11 +104,18 @@
       attached: function() {
         setTimeout(function() {
           this.$.gameBoard.render();
-          this.$.gameBoard.shuffle(100, 1000);
+          this.$.gameBoard.shuffle(4, 1000);
         }.bind(this), 500);
       },
       handleMove: function() {
         this.stepCount += 1;
+      },
+      handleGameSolved: function() {
+        var body = {
+          'stepCount': this.stepCount
+        }
+        this.$.solveGame.body = 'stepCount=' + this.stepCount;
+        this.$.solveGame.generateRequest();
       },
       handleReset: function() {
         this.stepCount = 0;
@@ -121,6 +135,9 @@
         giveupImgEl.style.margin = '0 auto';
         giveupImgEl.style.height = '300px';
         this.$.gameContainer.replaceChild(giveupImgEl, this.gameBoardEl);
+      },
+      _solveGameUrl: function(imageId) {
+        return '/_/solve/' + imageId;
       },
       _getResizeImageUrl: function(imageId, size) {
          return 'http://res.cloudinary.com/sunnydaytech/image/upload/c_fill,h_' + 
