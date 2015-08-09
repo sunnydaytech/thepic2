@@ -119,7 +119,7 @@
       },
       handleReset: function() {
         this.stepCount = 0;
-        this.gameBoardEl.shuffle(100, 1000);
+        this.$.gameBoard.shuffle(100, 1000);
       },
       handleHint: function() {
         this.$.buttons.classList.add('hidden');
@@ -134,7 +134,7 @@
         giveupImgEl.style.display = 'block';
         giveupImgEl.style.margin = '0 auto';
         giveupImgEl.style.height = '300px';
-        this.$.gameContainer.replaceChild(giveupImgEl, this.gameBoardEl);
+        this.$.gameContainer.replaceChild(giveupImgEl, this.$.gameBoard);
       },
       _solveGameUrl: function(imageId) {
         return '/_/solve/' + imageId;
