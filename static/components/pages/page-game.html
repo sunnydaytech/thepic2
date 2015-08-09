@@ -149,9 +149,11 @@
         }
       },
       attached: function() {
+        var wxThumbnail = document.getElementById('wxThumbnail');
+        wxThumbnail.src = this._getResizeImageUrl(this.args.id, 300);
         setTimeout(function() {
           this.$.gameBoard.render();
-          this.$.gameBoard.shuffle(5, 1000);
+          this.$.gameBoard.shuffle(100, 1000);
         }.bind(this), 500);
       },
       handleMove: function() {
@@ -202,6 +204,7 @@
           + this._getResizeImageUrl(this.imageId, 90) + '&ralateUid=&language=zh_cn';
       },
       shareWechat: function() {
+        window.document.title = "我用" + this.stepCount + "步拼出了这张图，你也来试试吧！"
         this.toggleClass('hidden', false, this.$.overlay);
       },
       hideOverlay: function() {
