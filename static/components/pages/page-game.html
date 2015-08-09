@@ -51,8 +51,24 @@
       font-size: 2em;
       color: #0590BD;
     }
+    #overlay {
+      position: fixed;
+      left: 0px;
+      top: 0px;
+      height: 100%;
+      width: 100%;
+      opacity: 0.8;
+      z-index: 200;
+      background: black;
+      color: white;
+      text-align: right;
+      padding: 30px;
+    }
   </style>
   <template>
+  <div id="overlay" on-click="hideOverlay" class="hidden">
+    点击右上角，分享到朋友圈
+  </div>
     <div on-move="handleMove" on-game-solved="handleGameSolved">
       <div class="step-count">已用<span id="countNumber">{{stepCount}}</span>步</div>
       <touch-controller id="gameContainer">
@@ -186,6 +202,10 @@
           + this._getResizeImageUrl(this.imageId, 90) + '&ralateUid=&language=zh_cn';
       },
       shareWechat: function() {
+        this.toggleClass('hidden', false, this.$.overlay);
+      },
+      hideOverlay: function() {
+        this.toggleClass('hidden', true, this.$.overlay);
       },
       _solveGameUrl: function(imageId) {
         return '/_/solve/' + imageId;
