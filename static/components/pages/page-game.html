@@ -3,6 +3,7 @@
 
 <link rel="import" href="/components/index-button.html">
 <link rel="import" href="/components/touch-controller.html">
+<link rel="import" href="/components/bottom-menu.html">
 
 <dom-module id="page-game">
   <style>
@@ -44,6 +45,12 @@
       top: 10px;
       z-index: -1;
     }
+    #shareButton {
+      text-align: center;
+      padding: 30px;
+      font-size: 2em;
+      color: #0590BD;
+    }
   </style>
   <template>
     <div on-move="handleMove" on-game-solved="handleGameSolved">
@@ -72,6 +79,9 @@
             button-text="我要放弃">
         </index-button>
       </div>
+      <p id="shareButton" on-click="openShareMenu" class="hidden">
+        奔走相告小伙伴
+      </p>
 
       <div id="hint" class="hidden">
         <div id="container">
@@ -80,6 +90,27 @@
         </div>
       </div>
     </div>
+    <bottom-menu id="bottomMenu" title="分享" class="hidden">
+        <div class="login-icons">
+          <index-button 
+            src="/img/twitter.jpg"
+            on-click="shareTwitter"
+            button-text="Twitter"></index-button>
+          <index-button 
+            src="/img/facebook.jpg"
+            on-click="shareFacebook"
+            button-text="Facebook"></index-button>
+          <index-button 
+            src="/img/weibo.jpg"
+            on-click="shareWeibo"
+            button-text="Weibo"></index-button>
+          <index-button 
+            src="/img/wechat.png"
+            on-click="shareWechat"
+            button-text="wechat"></index-button>
+
+        </div>
+      </bottom-menu>
     <iron-ajax
       id="solveGame"
       method="POST"
@@ -104,7 +135,7 @@
       attached: function() {
         setTimeout(function() {
           this.$.gameBoard.render();
-          this.$.gameBoard.shuffle(100, 1000);
+          this.$.gameBoard.shuffle(5, 1000);
         }.bind(this), 500);
       },
       handleMove: function() {
@@ -116,6 +147,8 @@
         }
         this.$.solveGame.body = 'stepCount=' + this.stepCount;
         this.$.solveGame.generateRequest();
+        this.toggleClass('hidden', true, this.$.buttons);
+        this.toggleClass('hidden', false, this.$.shareButton);
       },
       handleReset: function() {
         this.stepCount = 0;
@@ -129,12 +162,30 @@
           this.$.hint.classList.add('hidden');
         }.bind(this), 1000);
       },
+      openShareMenu: function() {
+        this.$.bottomMenu.toggleClass('hidden');
+      },
       handleGiveup: function() {
         var giveupImgEl = this.create('img', {'src': '/img/sad_1x.png'}); 
         giveupImgEl.style.display = 'block';
         giveupImgEl.style.margin = '0 auto';
         giveupImgEl.style.height = '300px';
         this.$.gameContainer.replaceChild(giveupImgEl, this.$.gameBoard);
+      },
+      shareTwitter: function() {
+        window.location.href = 'https://twitter.com/home?status='
+          + window.location.href;
+      },
+      shareFacebook: function() {
+        window.location.href = 'https://www.facebook.com/sharer/sharer.php?u='
+          + encodeURIComponent(window.location.href);
+      },
+      shareWeibo: function() {
+        window.location.href='http://service.weibo.com/share/share.php?url='
+          + window.location.href + '&appkey=541320060&title=图方&pic='
+          + this._getResizeImageUrl(this.imageId, 90) + '&ralateUid=&language=zh_cn';
+      },
+      shareWechat: function() {
       },
       _solveGameUrl: function(imageId) {
         return '/_/solve/' + imageId;
